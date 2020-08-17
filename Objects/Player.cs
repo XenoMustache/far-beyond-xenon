@@ -63,7 +63,7 @@ namespace FarBeyond.Objects {
 			cam.target = position;
 			cam.Update(deltaTime);
 
-			emitter.angle += a * rotationSpeed;
+			emitter.angle += rotate * rotationSpeed;
 			emitter.position = position;
 			emitter.Update(deltaTime);
 
