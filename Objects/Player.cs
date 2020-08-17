@@ -9,20 +9,23 @@ using static System.Math;
 
 namespace FarBeyond.Objects {
 	public class Player : GameObject {
+		public float angle;
 		public Vector2f position;
 		public CollisionBox collider;
 
 		float acceleration = 0.5f, topSpeed = 100, defaultSpeed = 25, drag = 0.25f, defaultRotationSpeed = 0.75f, acceleratedRotation = 1.5f,
 			rotationDrag = 0.1f;
-		float speed, angle, moveAngle, rotationSpeed;
+		float speed, moveAngle, rotationSpeed;
 		IntRect spriteRect;
 		Sprite sprite;
 		Camera cam;
+		ProjectileEmitter emitter;
 
 		public Player(Vector2f position) {
 			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i(32, 32));
 
 			cam = new Camera();
+			emitter = new ProjectileEmitter(position, Color.White);
 			sprite = new Sprite(AssetRegistry.civShipsTexture, spriteRect);
 
 			rotationSpeed = defaultRotationSpeed;
@@ -50,7 +53,7 @@ namespace FarBeyond.Objects {
 			}
 
 			angle += MiscUtils.DegToRad(rotate * rotationSpeed);
-			sprite.Rotation += (rotate * rotationSpeed);
+			sprite.Rotation += rotate * rotationSpeed;
 
 			position.X += (float)Sin(moveAngle) * speed * (float)deltaTime;
 			position.Y += (float)-Cos(moveAngle) * speed * (float)deltaTime;
@@ -60,6 +63,12 @@ namespace FarBeyond.Objects {
 			cam.target = position;
 			cam.Update(deltaTime);
 
+			emitter.angle += rotate * rotationSpeed;
+			emitter.position = position;
+			emitter.Update(deltaTime);
+
+			if (Input.GetKey(SFML.Window.Keyboard.Key.Space, true)) emitter.Fire(ProjectileEmitter.ProjectileType.playerShot);
+
 			collider.position = position;
 			collider.Update(deltaTime);
 		}
@@ -68,6 +77,7 @@ namespace FarBeyond.Objects {
 			cam.Render(window);
 			window.Draw(sprite);
 
+			emitter.Render(window);
 			collider.Render(window);
 		}
 	}

@@ -28,8 +28,7 @@ namespace FarBeyond {
 			};
 
 			player = new Player(new Vector2f(0, 0));
-			testProj = new Projectile(ProjectileType.player);
-			testProj.position = new Vector2f(32, 0);
+			testProj = new Projectile(ProjectileType.player, new Vector2f(32, 0), 0);
 
 			base.Init();
 		}

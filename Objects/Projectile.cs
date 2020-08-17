@@ -7,6 +7,7 @@ using static System.Math;
 
 namespace FarBeyond.Objects {
 	public class Projectile : GameObject {
+		public float angle, speed;
 		public Vector2f position;
 		public CollisionBox collider;
 
@@ -16,11 +17,12 @@ namespace FarBeyond.Objects {
 			pirate
 		}
 
-		float angle, speed;
 		Sprite sprite;
 		IntRect spriteRect;
 
-		public Projectile(ProjectileType type) {
+		public Projectile(ProjectileType type, Vector2f position, float angle) {
+			this.angle = angle;
+			this.position = position;
 			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i((int)AssetRegistry.bulletsTexture.Size.X / 5, (int)AssetRegistry.bulletsTexture.Size.Y / 3));
 
 			switch (type) {
@@ -33,6 +35,7 @@ namespace FarBeyond.Objects {
 
 			sprite.Origin = new Vector2f(spriteRect.Width / 2, spriteRect.Height / 2);
 			sprite.Position = position;
+			sprite.Rotation = angle;
 
 			collider = new CollisionBox(this, position, new Vector2f(12, 12), Color.White);
 		}
