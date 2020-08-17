@@ -1,4 +1,4 @@
-﻿using Seed.Registry;
+﻿using FarBeyond.Registry;
 using SFML.Graphics;
 using SFML.System;
 using Xenon.Client;
