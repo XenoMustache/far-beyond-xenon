@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Farbeyond</RootNamespace>
+    <RootNamespace>FarBeyond</RootNamespace>
     <AssemblyName>Far Beyond Xenon</AssemblyName>
   </PropertyGroup>
 

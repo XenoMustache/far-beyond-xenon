@@ -1,6 +1,6 @@
 ﻿using SFML.Graphics;
 
-namespace Seed.Registry {
+namespace FarBeyond.Registry {
 	public class AssetRegistry {
 		public static Texture civShips, bullets;
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Xenon.Common;
 using Xenon.Common.Utilities;
 
-namespace Seed.Objects {
+namespace FarBeyond.Objects {
 	public class SolarSystem : GameObject {
 		public AstralBody star;
 

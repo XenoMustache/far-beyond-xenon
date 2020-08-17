@@ -1,6 +1,6 @@
 ﻿using Xenon.Common.Utilities;
 
-namespace Seed {
+namespace FarBeyond {
 	class Program {
 		public static readonly string VERSION = "0.1 Pre-Alpha";
 

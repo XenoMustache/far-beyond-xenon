@@ -7,7 +7,7 @@ using Xenon.Common;
 using Xenon.Common.Utilities;
 using static System.Math;
 
-namespace Seed.Objects {
+namespace FarBeyond.Objects {
 	public class Player : GameObject {
 		public Vector2f position;
 		public CollisionBox collider;

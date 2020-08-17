@@ -1,12 +1,12 @@
 ﻿using SFML.System;
 using SFML.Graphics;
 using Xenon.Client;
-using Seed.Objects;
-using Seed.Registry;
-using static Seed.Objects.Projectile;
+using FarBeyond.Objects;
+using FarBeyond.Registry;
+using static FarBeyond.Objects.Projectile;
 using Xenon.Common.Utilities;
 
-namespace Seed {
+namespace FarBeyond {
 	public class FarBeyond : Game {
 		public static bool showHitboxes = false;
 

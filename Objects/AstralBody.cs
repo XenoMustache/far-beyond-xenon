@@ -3,7 +3,7 @@ using SFML.Graphics;
 using SFML.System;
 using Xenon.Common;
 
-namespace Seed.Objects {
+namespace FarBeyond.Objects {
 	public class AstralBody : GameObject {
 		[JsonIgnore]
 		public CircleShape body;

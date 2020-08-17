@@ -3,7 +3,7 @@ using SFML.Graphics;
 using SFML.System;
 using System;
 
-namespace Seed.Objects {
+namespace FarBeyond.Objects {
 	public class Planet : AstralBody {
 		public bool doOrbit, invertRotation, showOrbit;
 

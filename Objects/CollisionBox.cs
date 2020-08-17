@@ -3,7 +3,7 @@ using SFML.System;
 using Xenon.Common;
 using Xenon.Common.Utilities;
 
-namespace Seed.Objects {
+namespace FarBeyond.Objects {
 	public class CollisionBox : GameObject {
 		public bool display;
 		public CollisionBox targetCollider;
