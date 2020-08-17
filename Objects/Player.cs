@@ -75,9 +75,10 @@ namespace FarBeyond.Objects {
 
 		public override void Render(RenderWindow window) {
 			cam.Render(window);
+			emitter.Render(window);
+
 			window.Draw(sprite);
 
-			emitter.Render(window);
 			collider.Render(window);
 		}
 	}
