@@ -23,7 +23,7 @@ namespace FarBeyond.Objects {
 			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i(32, 32));
 
 			cam = new Camera();
-			sprite = new Sprite(AssetRegistry.civShips, spriteRect);
+			sprite = new Sprite(AssetRegistry.civShipsTexture, spriteRect);
 
 			rotationSpeed = defaultRotationSpeed;
 

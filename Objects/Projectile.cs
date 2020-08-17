@@ -21,7 +21,7 @@ namespace FarBeyond.Objects {
 		IntRect spriteRect;
 
 		public Projectile(ProjectileType type) {
-			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i((int)AssetRegistry.bullets.Size.X / 5, (int)AssetRegistry.bullets.Size.Y / 3));
+			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i((int)AssetRegistry.bulletsTexture.Size.X / 5, (int)AssetRegistry.bulletsTexture.Size.Y / 3));
 
 			switch (type) {
 				case ProjectileType.security: spriteRect.Top = 0; break;
@@ -29,7 +29,7 @@ namespace FarBeyond.Objects {
 				case ProjectileType.pirate: spriteRect.Top = 32; break;
 			}
 
-			sprite = new Sprite(AssetRegistry.bullets, spriteRect);
+			sprite = new Sprite(AssetRegistry.bulletsTexture, spriteRect);
 
 			sprite.Origin = new Vector2f(spriteRect.Width / 2, spriteRect.Height / 2);
 			sprite.Position = position;
