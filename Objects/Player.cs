@@ -9,13 +9,12 @@ using static System.Math;
 
 namespace FarBeyond.Objects {
 	public class Player : GameObject {
-		public float angle;
 		public Vector2f position;
 		public CollisionBox collider;
 
 		float acceleration = 0.5f, topSpeed = 100, defaultSpeed = 25, drag = 0.25f, defaultRotationSpeed = 0.75f, acceleratedRotation = 1.5f,
 			rotationDrag = 0.1f;
-		float speed, moveAngle, rotationSpeed;
+		float speed, angle, moveAngle, rotationSpeed;
 		IntRect spriteRect;
 		Sprite sprite;
 		Camera cam;
@@ -41,6 +40,7 @@ namespace FarBeyond.Objects {
 		public override void Update(double deltaTime) {
 			var move = Input.GetKey(SFML.Window.Keyboard.Key.W, true);
 			var rotate = Input.GetKey(SFML.Window.Keyboard.Key.D) - Input.GetKey(SFML.Window.Keyboard.Key.A);
+			var a = MiscUtils.DegToRad(rotate);
 
 			if (move) {
 				if (speed < defaultSpeed) speed = defaultSpeed;
@@ -52,7 +52,7 @@ namespace FarBeyond.Objects {
 				if (rotationSpeed > defaultRotationSpeed) rotationSpeed -= rotationDrag;
 			}
 
-			angle += MiscUtils.DegToRad(rotate * rotationSpeed);
+			angle += a * rotationSpeed;
 			sprite.Rotation += rotate * rotationSpeed;
 
 			position.X += (float)Sin(moveAngle) * speed * (float)deltaTime;
@@ -63,7 +63,7 @@ namespace FarBeyond.Objects {
 			cam.target = position;
 			cam.Update(deltaTime);
 
-			emitter.angle += rotate * rotationSpeed;
+			emitter.angle += a * rotationSpeed;
 			emitter.position = position;
 			emitter.Update(deltaTime);
 

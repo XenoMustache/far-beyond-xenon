@@ -7,9 +7,11 @@ using static System.Math;
 
 namespace FarBeyond.Objects {
 	public class Projectile : GameObject {
-		public float angle, speed;
+		public float speed;
 		public Vector2f position;
 		public CollisionBox collider;
+
+		float angle;
 
 		public enum ProjectileType {
 			security,
