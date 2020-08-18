@@ -1,17 +1,15 @@
 ﻿using FarBeyond.Registry;
 using SFML.Graphics;
 using SFML.System;
-using Xenon.Common;
 using Xenon.Common.Utilities;
 using static System.Math;
 
-namespace FarBeyond.Objects {
-	public class Projectile : GameObject {
+namespace FarBeyond.Objects.Entities {
+	public class Projectile : Entity {
 		public float speed;
-		public Vector2f position;
-		public CollisionBox collider;
 
 		float angle;
+		EntityLiving hit;
 
 		public enum ProjectileType {
 			security,
@@ -22,7 +20,7 @@ namespace FarBeyond.Objects {
 		Sprite sprite;
 		IntRect spriteRect;
 
-		public Projectile(ProjectileType type, Vector2f position, float angle) {
+		public Projectile(Vector2f position, ProjectileType type, float angle) : base(position) {
 			this.angle = angle;
 			this.position = position;
 			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i((int)AssetRegistry.bulletsTexture.Size.X / 5, (int)AssetRegistry.bulletsTexture.Size.Y / 3));
@@ -58,6 +56,10 @@ namespace FarBeyond.Objects {
 		public override void Render(RenderWindow window) {
 			window.Draw(sprite);
 			collider.Render(window);
+		}
+
+		public void OnHit() {
+
 		}
 
 		protected override void OnDispose() {

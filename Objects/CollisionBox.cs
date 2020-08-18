@@ -1,24 +1,26 @@
-﻿using SFML.Graphics;
+﻿using FarBeyond.Objects.Entities;
+using SFML.Graphics;
 using SFML.System;
+using System.Collections.Generic;
 using Xenon.Common;
 using Xenon.Common.Utilities;
 
 namespace FarBeyond.Objects {
 	public class CollisionBox : GameObject {
 		public bool display;
-		public CollisionBox targetCollider;
 		public Vector2f position, size;
 		public RectangleShape colliderRect;
+		public Entity parent;
 
-		protected CollisionBox collided;
+		public List<CollisionBox> targets;
 
 		bool hasEntered;
-		GameObject parent;
 
-		public CollisionBox(GameObject parent, Vector2f position, Vector2f size, Color color) {
+		public CollisionBox(Entity parent, Vector2f position, Vector2f size, Color color) {
 			this.parent = parent;
 			this.position = position;
 			this.size = size;
+			targets = new List<CollisionBox>();
 
 			colliderRect = new RectangleShape(size);
 
@@ -28,13 +30,11 @@ namespace FarBeyond.Objects {
 			colliderRect.OutlineThickness = 0.5f;
 		}
 
-		public virtual void OnColliderEnter() {
-			Logger.Print("Enter");
-			collided = targetCollider;
+		public virtual void OnColliderEnter(CollisionBox collided) {
+			Logger.Print($"Collided with object at X:{collided.position.X}, Y: {collided.position.Y}");
 		}
 
-		public virtual void OnColliderExit() {
-			collided = null;
+		public virtual void OnColliderExit(CollisionBox collided) {
 		}
 
 		public GameObject GetParent() { return parent; }
@@ -42,12 +42,15 @@ namespace FarBeyond.Objects {
 		public override void Update(double deltaTime) {
 			colliderRect.Position = position;
 
-			if (targetCollider != null && colliderRect.GetGlobalBounds().Intersects(targetCollider.colliderRect.GetGlobalBounds()) && !hasEntered) {
-				hasEntered = true;
-				OnColliderEnter();
-			} else if (targetCollider != null && !colliderRect.GetGlobalBounds().Intersects(targetCollider.colliderRect.GetGlobalBounds()) && hasEntered) {
-				hasEntered = false;
-				OnColliderExit();
+			for (var i = 0; i < targets.Count; i++) {
+				var box = targets[i];
+				if (box != null && colliderRect.GetGlobalBounds().Intersects(box.colliderRect.GetGlobalBounds()) && !hasEntered) {
+					hasEntered = true;
+					OnColliderEnter(box);
+				} else if (box != null && !colliderRect.GetGlobalBounds().Intersects(box.colliderRect.GetGlobalBounds()) && hasEntered) {
+					hasEntered = false;
+					OnColliderExit(box);
+				}
 			}
 
 			display = FarBeyond.showHitboxes;

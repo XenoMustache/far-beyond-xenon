@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using FarBeyond.Objects.Entities;
+using SFML.Graphics;
 using SFML.System;
 using System.Collections.Generic;
 using Xenon.Common;
@@ -65,7 +66,7 @@ namespace FarBeyond.Objects {
 		public void Fire(ProjectileType type) {
 			switch (type) {
 				case ProjectileType.playerShot:
-					var projectile = new Projectile(Projectile.ProjectileType.player, position, angle);
+					var projectile = new Projectile(position, Projectile.ProjectileType.player, angle);
 					projectile.speed = 1000;
 
 					projectiles.Add(projectile);

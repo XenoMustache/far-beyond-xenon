@@ -3,14 +3,12 @@ using SFML.Graphics;
 using SFML.System;
 using Xenon.Client;
 using Xenon.Client.UI;
-using Xenon.Common;
 using Xenon.Common.Utilities;
 using static System.Math;
 
-namespace FarBeyond.Objects {
-	public class Player : GameObject {
-		public Vector2f position;
-		public CollisionBox collider;
+namespace FarBeyond.Objects.Entities {
+	public class Player : EntityLiving {
+		public ProjectileEmitter emitter;
 
 		float acceleration = 0.5f, topSpeed = 100, defaultSpeed = 25, drag = 0.25f, defaultRotationSpeed = 0.75f, acceleratedRotation = 1.5f,
 			rotationDrag = 0.1f;
@@ -18,9 +16,8 @@ namespace FarBeyond.Objects {
 		IntRect spriteRect;
 		Sprite sprite;
 		Camera cam;
-		ProjectileEmitter emitter;
 
-		public Player(Vector2f position) {
+		public Player(Vector2f position) : base(position) {
 			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i(32, 32));
 
 			cam = new Camera();
@@ -67,7 +64,6 @@ namespace FarBeyond.Objects {
 			emitter.position = position;
 			emitter.Update(deltaTime);
 
-			if (Input.GetKey(SFML.Window.Keyboard.Key.Space, true)) emitter.Fire(ProjectileEmitter.ProjectileType.playerShot);
 
 			collider.position = position;
 			collider.Update(deltaTime);

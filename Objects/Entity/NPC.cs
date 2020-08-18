@@ -1,13 +1,11 @@
 ﻿using FarBeyond.Registry;
 using SFML.Graphics;
 using SFML.System;
-using Xenon.Common;
 
-namespace FarBeyond.Objects {
-	public class NPC : GameObject {
+namespace FarBeyond.Objects.Entities {
+	public class NPC : EntityLiving {
 		float angle;
 		int spriteIndex;
-		Vector2f position;
 		IntRect spriteRect;
 		Texture imageIndex;
 		Sprite sprite;
@@ -20,7 +18,7 @@ namespace FarBeyond.Objects {
 		}
 
 		// TODO: replace enum with NPC registry
-		public NPC(NPCType type, Vector2f position) {
+		public NPC(Vector2f position, NPCType type) : base(position) {
 			this.position = position;
 
 			switch (type) {

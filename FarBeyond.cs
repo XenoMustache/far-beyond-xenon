@@ -1,9 +1,9 @@
 ﻿using SFML.System;
-using SFML.Graphics;
 using Xenon.Client;
 using FarBeyond.Objects;
 using FarBeyond.Registry;
-using static FarBeyond.Objects.Projectile;
+using FarBeyond.Objects.Entities;
+using static FarBeyond.Objects.Entities.Projectile;
 
 namespace FarBeyond {
 	public class FarBeyond : Game {
@@ -25,11 +25,17 @@ namespace FarBeyond {
 				if (e.Code == SFML.Window.Keyboard.Key.F2) {
 					if (!showHitboxes) showHitboxes = true; else showHitboxes = false;
 				}
+
+				if (e.Code == SFML.Window.Keyboard.Key.Space) {
+					player.emitter.Fire(ProjectileEmitter.ProjectileType.playerShot);
+				}
 			};
 
-			testNPC = new NPC(NPC.NPCType.Civ, new Vector2f(-32, 0));
+			window.SetKeyRepeatEnabled(false);
+
+			testNPC = new NPC(new Vector2f(-32, 0), NPC.NPCType.Civ);
 			player = new Player(new Vector2f(0, 0));
-			testProj = new Projectile(ProjectileType.player, new Vector2f(32, 0), 0);
+			testProj = new Projectile(new Vector2f(32, 0), ProjectileType.player, 0);
 
 			base.Init();
 		}
@@ -39,7 +45,9 @@ namespace FarBeyond {
 			testProj.Update(deltatime);
 			player.Update(deltatime);
 
-			testProj.collider.targetCollider = player.collider;
+			if (testProj.collider.targets.Contains(player.collider))
+				testProj.collider.targets.Remove(player.collider);
+			testProj.collider.targets.Add(player.collider);
 		}
 
 		protected override void Render() {
