@@ -11,7 +11,6 @@ namespace FarBeyond.Objects {
 		public Vector2f position, size;
 		public RectangleShape colliderRect;
 		public Entity parent;
-
 		public List<CollisionBox> targets;
 
 		bool hasEntered;
@@ -20,8 +19,8 @@ namespace FarBeyond.Objects {
 			this.parent = parent;
 			this.position = position;
 			this.size = size;
-			targets = new List<CollisionBox>();
 
+			targets = new List<CollisionBox>();
 			colliderRect = new RectangleShape(size);
 
 			colliderRect.Origin = size / 2;
@@ -34,8 +33,7 @@ namespace FarBeyond.Objects {
 			Logger.Print($"Collided with object at X:{collided.position.X}, Y: {collided.position.Y}");
 		}
 
-		public virtual void OnColliderExit(CollisionBox collided) {
-		}
+		public virtual void OnColliderExit(CollisionBox collided) { }
 
 		public GameObject GetParent() { return parent; }
 

@@ -61,9 +61,10 @@ namespace FarBeyond.Objects.Entities {
 			cam.Update(deltaTime);
 
 			emitter.angle += rotate * rotationSpeed;
-			emitter.position = position;
+			emitter.inputPosition = position;
+			emitter.offset.X = -6.5f;
+			emitter.offset.Y = -10;
 			emitter.Update(deltaTime);
-
 
 			collider.position = position;
 			collider.Update(deltaTime);

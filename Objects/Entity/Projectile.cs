@@ -9,7 +9,6 @@ namespace FarBeyond.Objects.Entities {
 		public float speed;
 
 		float angle;
-		EntityLiving hit;
 
 		public enum ProjectileType {
 			security,
@@ -56,10 +55,6 @@ namespace FarBeyond.Objects.Entities {
 		public override void Render(RenderWindow window) {
 			window.Draw(sprite);
 			collider.Render(window);
-		}
-
-		public void OnHit() {
-
 		}
 
 		protected override void OnDispose() {

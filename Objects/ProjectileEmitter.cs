@@ -1,13 +1,15 @@
 ﻿using FarBeyond.Objects.Entities;
 using SFML.Graphics;
 using SFML.System;
+using System;
 using System.Collections.Generic;
 using Xenon.Common;
+using Xenon.Common.Utilities;
 
 namespace FarBeyond.Objects {
 	public class ProjectileEmitter : GameObject {
 		public float angle;
-		public Vector2f position;
+		public Vector2f inputPosition, position, offset;
 
 		public List<Projectile> projectiles;
 
@@ -19,7 +21,7 @@ namespace FarBeyond.Objects {
 		}
 
 		public ProjectileEmitter(Vector2f position, Color color) {
-			this.position = position;
+			this.inputPosition = position;
 
 			projectiles = new List<Projectile>();
 
@@ -31,8 +33,8 @@ namespace FarBeyond.Objects {
 			displayLine.Rotation = angle;
 
 			displayRect = new RectangleShape();
-			displayRect.Size = new Vector2f(8, 8);
-			displayRect.Origin = new Vector2f(4, 4);
+			displayRect.Size = new Vector2f(4, 4);
+			displayRect.Origin = new Vector2f(displayRect.Size.X / 2, displayRect.Size.Y / 2);
 			displayRect.Position = position;
 			displayRect.FillColor = Color.Transparent;
 			displayRect.OutlineColor = color;
@@ -40,12 +42,19 @@ namespace FarBeyond.Objects {
 		}
 
 		public override void Update(double deltaTime) {
+			position.X = offset.X * (float)Math.Cos(MiscUtils.DegToRad(angle)) + inputPosition.X;
+			position.Y = offset.X * (float)Math.Sin(MiscUtils.DegToRad(angle)) + inputPosition.Y;
+
+			var rectPos = new Vector2f();
+			rectPos.X = offset.Y * (float)Math.Sin(MiscUtils.DegToRad(-angle)) + position.X;
+			rectPos.Y = offset.Y * (float)Math.Cos(MiscUtils.DegToRad(-angle)) + position.Y;
+
 			display = FarBeyond.showHitboxes;
 
 			displayLine.Position = position;
 			displayLine.Rotation = angle;
 
-			displayRect.Position = position;
+			displayRect.Position = rectPos;
 
 			foreach(var projectile in projectiles) {
 				projectile.Update(deltaTime);
@@ -63,11 +72,17 @@ namespace FarBeyond.Objects {
 			}
 		}
 
+		// TODO: Replace with registry
 		public void Fire(ProjectileType type) {
 			switch (type) {
 				case ProjectileType.playerShot:
-					var projectile = new Projectile(position, Projectile.ProjectileType.player, angle);
-					projectile.speed = 1000;
+					var pos = new Vector2f();
+
+					pos.X = offset.Y * (float)Math.Sin(MiscUtils.DegToRad(-angle)) + position.X;
+					pos.Y = offset.Y * (float)Math.Cos(MiscUtils.DegToRad(-angle)) + position.Y;
+
+					var projectile = new Projectile(pos, Projectile.ProjectileType.player, angle);
+					projectile.speed = 200;
 
 					projectiles.Add(projectile);
 					break;
