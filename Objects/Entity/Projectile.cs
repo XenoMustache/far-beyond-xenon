@@ -6,9 +6,10 @@ using static System.Math;
 
 namespace FarBeyond.Objects.Entities {
 	public class Projectile : Entity {
-		public float speed;
+		public float speed, lifeTime = 1000;
+		Clock disposeTimer;
 
-		float angle;
+		float angle, life;
 
 		public enum ProjectileType {
 			security,
@@ -23,6 +24,8 @@ namespace FarBeyond.Objects.Entities {
 			this.angle = angle;
 			this.position = position;
 			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i((int)AssetRegistry.bulletsTexture.Size.X / 5, (int)AssetRegistry.bulletsTexture.Size.Y / 3));
+
+			disposeTimer = new Clock();
 
 			switch (type) {
 				case ProjectileType.security: spriteRect.Top = 0; break;
@@ -40,6 +43,8 @@ namespace FarBeyond.Objects.Entities {
 		}
 
 		public override void Update(double deltaTime) {
+			life = disposeTimer.ElapsedTime.AsMilliseconds();
+
 			var a = MiscUtils.DegToRad(angle);
 
 			position.X += (float)Sin(a) * speed * (float)deltaTime;
@@ -48,17 +53,26 @@ namespace FarBeyond.Objects.Entities {
 			sprite.Position = position;
 			sprite.Rotation = angle;
 
-			collider.position = position;
-			collider.Update(deltaTime);
+			if (collider != null) {
+				collider.position = position;
+				collider.Update(deltaTime);
+			}
+
+			if (life >= lifeTime) {
+				Dispose();
+			}
 		}
 
 		public override void Render(RenderWindow window) {
 			window.Draw(sprite);
-			collider.Render(window);
+			if (collider != null) collider.Render(window);
 		}
 
 		protected override void OnDispose() {
+			disposeTimer.Dispose();
+			collider.Dispose();
 			sprite.Dispose();
+
 			base.OnDispose();
 		}
 	}

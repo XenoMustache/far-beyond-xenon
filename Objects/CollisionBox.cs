@@ -57,5 +57,11 @@ namespace FarBeyond.Objects {
 		public override void Render(RenderWindow window) {
 			if (display) window.Draw(colliderRect);
 		}
+
+		protected override void OnDispose() {
+			colliderRect.Dispose();
+
+			base.OnDispose();
+		}
 	}
 }

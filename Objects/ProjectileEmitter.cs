@@ -21,7 +21,7 @@ namespace FarBeyond.Objects {
 		}
 
 		public ProjectileEmitter(Vector2f position, Color color) {
-			this.inputPosition = position;
+			inputPosition = position;
 
 			projectiles = new List<Projectile>();
 
@@ -57,7 +57,7 @@ namespace FarBeyond.Objects {
 			displayRect.Position = rectPos;
 
 			foreach(var projectile in projectiles) {
-				projectile.Update(deltaTime);
+				if (!projectile.disposed) projectile.Update(deltaTime);
 			}
 		}
 
@@ -68,7 +68,7 @@ namespace FarBeyond.Objects {
 			}
 
 			foreach (var projectile in projectiles) {
-				projectile.Render(window);
+				if (!projectile.disposed) projectile.Render(window);
 			}
 		}
 

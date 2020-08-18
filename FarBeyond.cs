@@ -42,7 +42,7 @@ namespace FarBeyond {
 
 		protected override void Update() {
 			testNPC.Update(deltatime);
-			testProj.Update(deltatime);
+			if (!testProj.disposed) testProj.Update(deltatime);
 			player.Update(deltatime);
 
 			if (testProj.collider.targets.Contains(player.collider))
@@ -52,7 +52,7 @@ namespace FarBeyond {
 
 		protected override void Render() {
 			testNPC.Render(window);
-			testProj.Render(window);
+			if (!testProj.disposed) testProj.Render(window);
 			player.Render(window);
 		}
 
