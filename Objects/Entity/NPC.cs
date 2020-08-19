@@ -6,10 +6,9 @@ namespace FarBeyond.Objects.Entities {
 	public class NPC : EntityLiving {
 		float angle;
 		int spriteIndex;
-		IntRect spriteRect;
 		Texture imageIndex;
+		IntRect spriteRect;
 		Sprite sprite;
-
 
 		public enum NPCType {
 			Civ,
@@ -20,6 +19,7 @@ namespace FarBeyond.Objects.Entities {
 		// TODO: replace enum with NPC registry
 		public NPC(Vector2f position, NPCType type) : base(position) {
 			this.position = position;
+			angle = 0;
 
 			switch (type) {
 				case NPCType.Civ:

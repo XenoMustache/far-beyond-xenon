@@ -83,6 +83,7 @@ namespace FarBeyond.Objects {
 
 					var projectile = new Projectile(pos, Projectile.ProjectileType.player, angle);
 					projectile.speed = 200;
+					projectile.lifeTime = 2000;
 
 					projectiles.Add(projectile);
 					break;

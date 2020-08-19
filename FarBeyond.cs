@@ -27,7 +27,8 @@ namespace FarBeyond {
 				}
 
 				if (e.Code == SFML.Window.Keyboard.Key.Space) {
-					player.emitter.Fire(ProjectileEmitter.ProjectileType.playerShot);
+					player.leftEmitter.Fire(ProjectileEmitter.ProjectileType.playerShot);
+					player.rightEmitter.Fire(ProjectileEmitter.ProjectileType.playerShot);
 				}
 			};
 

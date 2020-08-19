@@ -3,7 +3,7 @@ using SFML.System;
 
 namespace FarBeyond.Objects.Entities {
 	public class EntityLiving : Entity {
-		float health;
+		public float health;
 
 		public EntityLiving(Vector2f position) : base(position) {
 			this.position = position;

@@ -8,7 +8,7 @@ using static System.Math;
 
 namespace FarBeyond.Objects.Entities {
 	public class Player : EntityLiving {
-		public ProjectileEmitter emitter;
+		public ProjectileEmitter leftEmitter, rightEmitter;
 
 		float acceleration = 0.5f, topSpeed = 100, defaultSpeed = 25, drag = 0.25f, defaultRotationSpeed = 0.75f, acceleratedRotation = 1.5f,
 			rotationDrag = 0.1f;
@@ -21,7 +21,8 @@ namespace FarBeyond.Objects.Entities {
 			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i(32, 32));
 
 			cam = new Camera();
-			emitter = new ProjectileEmitter(position, Color.White);
+			leftEmitter = new ProjectileEmitter(position, Color.White);
+			rightEmitter = new ProjectileEmitter(position, Color.White);
 			sprite = new Sprite(AssetRegistry.civShipsTexture, spriteRect);
 
 			rotationSpeed = defaultRotationSpeed;
@@ -60,11 +61,17 @@ namespace FarBeyond.Objects.Entities {
 			cam.target = position;
 			cam.Update(deltaTime);
 
-			emitter.angle += rotate * rotationSpeed;
-			emitter.inputPosition = position;
-			emitter.offset.X = -6.5f;
-			emitter.offset.Y = -10;
-			emitter.Update(deltaTime);
+			leftEmitter.angle += rotate * rotationSpeed;
+			leftEmitter.inputPosition = position;
+			leftEmitter.offset.X = -6.5f;
+			leftEmitter.offset.Y = -10;
+			leftEmitter.Update(deltaTime);
+
+			rightEmitter.angle += rotate * rotationSpeed;
+			rightEmitter.inputPosition = position;
+			rightEmitter.offset.X = 6.5f;
+			rightEmitter.offset.Y = -10;
+			rightEmitter.Update(deltaTime);
 
 			collider.position = position;
 			collider.Update(deltaTime);
@@ -72,7 +79,8 @@ namespace FarBeyond.Objects.Entities {
 
 		public override void Render(RenderWindow window) {
 			cam.Render(window);
-			emitter.Render(window);
+			leftEmitter.Render(window);
+			rightEmitter.Render(window);
 
 			window.Draw(sprite);
 

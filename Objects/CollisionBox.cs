@@ -30,7 +30,7 @@ namespace FarBeyond.Objects {
 		}
 
 		public virtual void OnColliderEnter(CollisionBox collided) {
-			Logger.Print($"Collided with object at X:{collided.position.X}, Y: {collided.position.Y}");
+			Logger.Print($"Collided with object at X:{collided.position.X}, Y:{collided.position.Y}");
 		}
 
 		public virtual void OnColliderExit(CollisionBox collided) { }
