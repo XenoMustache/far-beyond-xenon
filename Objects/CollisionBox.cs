@@ -1,6 +1,7 @@
 ﻿using FarBeyond.Objects.Entities;
 using SFML.Graphics;
 using SFML.System;
+using System;
 using System.Collections.Generic;
 using Xenon.Common;
 using Xenon.Common.Utilities;
@@ -30,7 +31,7 @@ namespace FarBeyond.Objects {
 		}
 
 		public virtual void OnColliderEnter(CollisionBox collided) {
-			Logger.Print($"Collided with object at X:{collided.position.X}, Y:{collided.position.Y}");
+			Logger.Print($"Collided with object at X:{Math.Floor(collided.position.X)}, Y:{Math.Floor(collided.position.Y)}");
 		}
 
 		public virtual void OnColliderExit(CollisionBox collided) { }

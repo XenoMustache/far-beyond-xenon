@@ -34,17 +34,20 @@ namespace FarBeyond {
 
 			window.SetKeyRepeatEnabled(false);
 
-			testNPC = new NPC(new Vector2f(-32, 0), NPC.NPCType.Civ);
-			player = new Player(new Vector2f(0, 0));
+			testNPC = new NPC(new Vector2f(-32, 0), 100, NPC.NPCType.Civ);
+			player = new Player(new Vector2f(0, 0), 100);
 			testProj = new Projectile(new Vector2f(32, 0), ProjectileType.player, 0);
+
+			testProj.decay = false;
 
 			base.Init();
 		}
 
 		protected override void Update() {
-			testNPC.Update(deltatime);
+			if (!testNPC.disposed) testNPC.Update(deltatime);
 			if (!testProj.disposed) testProj.Update(deltatime);
-			player.Update(deltatime);
+
+			if (!player.disposed) player.Update(deltatime);
 
 			if (testProj.collider.targets.Contains(player.collider))
 				testProj.collider.targets.Remove(player.collider);
@@ -52,9 +55,10 @@ namespace FarBeyond {
 		}
 
 		protected override void Render() {
-			testNPC.Render(window);
+			if (!testNPC.disposed) testNPC.Render(window);
 			if (!testProj.disposed) testProj.Render(window);
-			player.Render(window);
+
+			if (!player.disposed) player.Render(window);
 		}
 
 		protected override void Exit() {

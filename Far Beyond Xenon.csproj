@@ -17,8 +17,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\Textures\bullets.png" />
-  </ItemGroup>
-
 </Project>

@@ -17,7 +17,7 @@ namespace FarBeyond.Objects.Entities {
 		Sprite sprite;
 		Camera cam;
 
-		public Player(Vector2f position) : base(position) {
+		public Player(Vector2f position, float health) : base(position, health) {
 			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i(32, 32));
 
 			cam = new Camera();

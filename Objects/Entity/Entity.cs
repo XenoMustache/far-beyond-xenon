@@ -12,5 +12,10 @@ namespace FarBeyond.Objects.Entities {
 		public override void Render(RenderWindow window) { }
 
 		public override void Update(double deltaTime) { }
+
+		protected override void OnDispose() {
+			collider.Dispose();
+			base.OnDispose();
+		}
 	}
 }

@@ -17,7 +17,7 @@ namespace FarBeyond.Objects.Entities {
 		}
 
 		// TODO: replace enum with NPC registry
-		public NPC(Vector2f position, NPCType type) : base(position) {
+		public NPC(Vector2f position, float health, NPCType type) : base(position, health) {
 			this.position = position;
 			angle = 0;
 
@@ -32,6 +32,8 @@ namespace FarBeyond.Objects.Entities {
 					break;
 			}
 
+			collider = new CollisionBox(this, position, new Vector2f(14, 14), Color.Red);
+
 			spriteRect = new IntRect(new Vector2i(0 + (32 * spriteIndex), 0), new Vector2i(32, 32));
 			sprite = new Sprite(imageIndex, spriteRect);
 
@@ -42,10 +44,15 @@ namespace FarBeyond.Objects.Entities {
 
 		public override void Render(RenderWindow window) {
 			window.Draw(sprite);
+
+			collider.Render(window);
 		}
 
 		public override void Update(double deltaTime) {
 			sprite.Position = position;
+
+			collider.position = position;
+			collider.Update(deltaTime);
 		}
 	}
 }

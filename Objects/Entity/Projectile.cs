@@ -7,9 +7,10 @@ using static System.Math;
 namespace FarBeyond.Objects.Entities {
 	public class Projectile : Entity {
 		public float speed, lifeTime = 1000;
+		public bool decay = true;
 		Clock disposeTimer;
 
-		float angle, life;
+		float angle;
 
 		public enum ProjectileType {
 			security,
@@ -43,7 +44,7 @@ namespace FarBeyond.Objects.Entities {
 		}
 
 		public override void Update(double deltaTime) {
-			life = disposeTimer.ElapsedTime.AsMilliseconds();
+			var life = disposeTimer.ElapsedTime.AsMilliseconds();
 
 			var a = MiscUtils.DegToRad(angle);
 
@@ -58,7 +59,7 @@ namespace FarBeyond.Objects.Entities {
 				collider.Update(deltaTime);
 			}
 
-			if (life >= lifeTime) {
+			if (decay && life >= lifeTime) {
 				Dispose();
 			}
 		}
@@ -70,7 +71,6 @@ namespace FarBeyond.Objects.Entities {
 
 		protected override void OnDispose() {
 			disposeTimer.Dispose();
-			collider.Dispose();
 			sprite.Dispose();
 
 			base.OnDispose();
