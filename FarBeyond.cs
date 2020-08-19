@@ -4,6 +4,7 @@ using FarBeyond.Objects;
 using FarBeyond.Registry;
 using FarBeyond.Objects.Entities;
 using static FarBeyond.Objects.Entities.Projectile;
+using System;
 
 namespace FarBeyond {
 	public class FarBeyond : Game {
@@ -39,6 +40,8 @@ namespace FarBeyond {
 			testProj = new Projectile(new Vector2f(32, 0), ProjectileType.player, 0);
 
 			testProj.decay = false;
+
+			testNPC.health = 100;
 			player.health = 100;
 
 			base.Init();
@@ -52,7 +55,36 @@ namespace FarBeyond {
 
 			if (testProj.collider.targets.Contains(player.collider))
 				testProj.collider.targets.Remove(player.collider);
+
 			testProj.collider.targets.Add(player.collider);
+
+			for (var i = 0; i < player.leftEmitter.projectiles.Count; i++) {
+				var projectile = player.leftEmitter.projectiles[i];
+				var targets = projectile.collider.targets;
+
+				if (targets.Contains(testNPC.collider)) targets.Remove(testNPC.collider);
+			}
+
+			for (var j = 0; j < player.rightEmitter.projectiles.Count; j++) {
+				var projectile = player.rightEmitter.projectiles[j];
+				var targets = projectile.collider.targets;
+
+				if (targets.Contains(testNPC.collider)) targets.Remove(testNPC.collider);
+			}
+
+			for (var k = 0; k < player.leftEmitter.projectiles.Count; k++) {
+				var projectile = player.leftEmitter.projectiles[k];
+				var targets = projectile.collider.targets;
+
+				if (!testNPC.disposed) targets.Add(testNPC.collider);
+			}
+
+			for (var l = 0; l < player.rightEmitter.projectiles.Count; l++) {
+				var projectile = player.rightEmitter.projectiles[l];
+				var targets = projectile.collider.targets;
+
+				if (!testNPC.disposed) targets.Add(testNPC.collider);
+			}
 		}
 
 		protected override void Render() {

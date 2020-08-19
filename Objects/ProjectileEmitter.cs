@@ -56,8 +56,8 @@ namespace FarBeyond.Objects {
 
 			displayRect.Position = rectPos;
 
-			foreach(var projectile in projectiles) {
-				if (!projectile.disposed) projectile.Update(deltaTime);
+			for (var i = 0; i < projectiles.Count; i++) {
+				if (!projectiles[i].disposed) projectiles[i].Update(deltaTime);
 			}
 		}
 
@@ -67,8 +67,8 @@ namespace FarBeyond.Objects {
 				window.Draw(displayRect);
 			}
 
-			foreach (var projectile in projectiles) {
-				if (!projectile.disposed) projectile.Render(window);
+			for (var i = 0; i < projectiles.Count; i++) {
+				if (!projectiles[i].disposed) projectiles[i].Render(window);
 			}
 		}
 

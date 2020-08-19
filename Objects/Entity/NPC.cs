@@ -53,6 +53,8 @@ namespace FarBeyond.Objects.Entities {
 
 			collider.position = position;
 			collider.Update(deltaTime);
+
+			if (health <= 0) Dispose();
 		}
 	}
 }
