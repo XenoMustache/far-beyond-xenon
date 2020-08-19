@@ -11,10 +11,10 @@ namespace FarBeyond.Objects {
 		public bool display;
 		public Vector2f position, size;
 		public RectangleShape colliderRect;
-		public Entity parent;
 		public List<CollisionBox> targets;
 
 		bool hasEntered;
+		Entity parent;
 
 		public CollisionBox(Entity parent, Vector2f position, Vector2f size, Color color) {
 			this.parent = parent;
@@ -36,7 +36,7 @@ namespace FarBeyond.Objects {
 
 		public virtual void OnColliderExit(CollisionBox collided) { }
 
-		public GameObject GetParent() { return parent; }
+		public Entity GetParent() { return parent; }
 
 		public override void Update(double deltaTime) {
 			colliderRect.Position = position;

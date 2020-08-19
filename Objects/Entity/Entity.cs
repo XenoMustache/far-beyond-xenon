@@ -4,10 +4,14 @@ using Xenon.Common;
 
 namespace FarBeyond.Objects.Entities {
 	public class Entity : GameObject {
+		public float health, maxHealth;
 		public Vector2f position;
 		public CollisionBox collider;
 
-		public Entity(Vector2f position) { this.position = position; }
+		public Entity(Vector2f position) { 
+			this.position = position;
+			this.position = position;
+		}
 
 		public override void Render(RenderWindow window) { }
 

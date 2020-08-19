@@ -3,7 +3,7 @@ using SFML.Graphics;
 using SFML.System;
 
 namespace FarBeyond.Objects.Entities {
-	public class NPC : EntityLiving {
+	public class NPC : Entity {
 		float angle;
 		int spriteIndex;
 		Texture imageIndex;
@@ -17,7 +17,7 @@ namespace FarBeyond.Objects.Entities {
 		}
 
 		// TODO: replace enum with NPC registry
-		public NPC(Vector2f position, float health, NPCType type) : base(position, health) {
+		public NPC(Vector2f position, NPCType type) : base(position) {
 			this.position = position;
 			angle = 0;
 

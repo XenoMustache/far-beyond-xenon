@@ -34,8 +34,8 @@ namespace FarBeyond {
 
 			window.SetKeyRepeatEnabled(false);
 
-			testNPC = new NPC(new Vector2f(-32, 0), 100, NPC.NPCType.Civ);
-			player = new Player(new Vector2f(0, 0), 100);
+			testNPC = new NPC(new Vector2f(-32, 0), NPC.NPCType.Civ);
+			player = new Player(new Vector2f(0, 0));
 			testProj = new Projectile(new Vector2f(32, 0), ProjectileType.player, 0);
 
 			testProj.decay = false;

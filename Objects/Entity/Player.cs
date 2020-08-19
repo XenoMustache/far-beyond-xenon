@@ -7,7 +7,7 @@ using Xenon.Common.Utilities;
 using static System.Math;
 
 namespace FarBeyond.Objects.Entities {
-	public class Player : EntityLiving {
+	public class Player : Entity {
 		public ProjectileEmitter leftEmitter, rightEmitter;
 
 		float acceleration = 0.5f, topSpeed = 100, defaultSpeed = 25, drag = 0.25f, defaultRotationSpeed = 0.75f, acceleratedRotation = 1.5f,
@@ -17,7 +17,7 @@ namespace FarBeyond.Objects.Entities {
 		Sprite sprite;
 		Camera cam;
 
-		public Player(Vector2f position, float health) : base(position, health) {
+		public Player(Vector2f position) : base(position) {
 			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i(32, 32));
 
 			cam = new Camera();
