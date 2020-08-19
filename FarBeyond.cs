@@ -39,6 +39,7 @@ namespace FarBeyond {
 			testProj = new Projectile(new Vector2f(32, 0), ProjectileType.player, 0);
 
 			testProj.decay = false;
+			player.health = 100;
 
 			base.Init();
 		}

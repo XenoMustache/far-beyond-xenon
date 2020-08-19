@@ -13,8 +13,9 @@ namespace FarBeyond.Objects {
 		public RectangleShape colliderRect;
 		public List<CollisionBox> targets;
 
+		protected Entity parent;
+
 		bool hasEntered;
-		Entity parent;
 
 		public CollisionBox(Entity parent, Vector2f position, Vector2f size, Color color) {
 			this.parent = parent;

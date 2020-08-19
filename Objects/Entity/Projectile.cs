@@ -6,7 +6,7 @@ using static System.Math;
 
 namespace FarBeyond.Objects.Entities {
 	public class Projectile : Entity {
-		public float speed, lifeTime = 1000;
+		public float speed, lifeTime = 1000, damage;
 		public bool decay = true;
 		Clock disposeTimer;
 
@@ -24,6 +24,7 @@ namespace FarBeyond.Objects.Entities {
 		public Projectile(Vector2f position, ProjectileType type, float angle) : base(position) {
 			this.angle = angle;
 			this.position = position;
+
 			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i((int)AssetRegistry.bulletsTexture.Size.X / 5, (int)AssetRegistry.bulletsTexture.Size.Y / 3));
 
 			disposeTimer = new Clock();
@@ -40,7 +41,7 @@ namespace FarBeyond.Objects.Entities {
 			sprite.Position = position;
 			sprite.Rotation = angle;
 
-			collider = new CollisionBox(this, position, new Vector2f(12, 12), Color.White);
+			collider = new ProjectileCollisionBox(this, position, new Vector2f(12, 12), 10, Color.White);
 		}
 
 		public override void Update(double deltaTime) {
