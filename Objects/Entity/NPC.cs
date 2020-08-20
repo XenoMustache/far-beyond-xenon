@@ -56,5 +56,10 @@ namespace FarBeyond.Objects.Entities {
 
 			if (health <= 0) Dispose();
 		}
+
+		protected override void OnDispose() {
+			collider.Dispose();
+			base.OnDispose();
+		}
 	}
 }

@@ -44,10 +44,10 @@ namespace FarBeyond.Objects {
 
 			for (var i = 0; i < targets.Count; i++) {
 				var box = targets[i];
-				if (box != null && colliderRect.GetGlobalBounds().Intersects(box.colliderRect.GetGlobalBounds()) && !hasEntered) {
+				if (!box.parent.disposed && colliderRect.GetGlobalBounds().Intersects(box.colliderRect.GetGlobalBounds()) && !hasEntered) {
 					hasEntered = true;
 					OnColliderEnter(box);
-				} else if (box != null && !colliderRect.GetGlobalBounds().Intersects(box.colliderRect.GetGlobalBounds()) && hasEntered) {
+				} else if (!box.parent.disposed && !colliderRect.GetGlobalBounds().Intersects(box.colliderRect.GetGlobalBounds()) && hasEntered) {
 					hasEntered = false;
 					OnColliderExit(box);
 				}

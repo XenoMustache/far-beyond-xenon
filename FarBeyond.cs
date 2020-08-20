@@ -58,32 +58,34 @@ namespace FarBeyond {
 
 			testProj.collider.targets.Add(player.collider);
 
-			for (var i = 0; i < player.leftEmitter.projectiles.Count; i++) {
-				var projectile = player.leftEmitter.projectiles[i];
-				var targets = projectile.collider.targets;
+			if (!testNPC.disposed) {
+				for (var i = 0; i < player.leftEmitter.projectiles.Count; i++) {
+					var projectile = player.leftEmitter.projectiles[i];
+					var targets = projectile.collider.targets;
 
-				if (targets.Contains(testNPC.collider)) targets.Remove(testNPC.collider);
-			}
+					if (targets.Contains(testNPC.collider)) targets.Remove(testNPC.collider);
+				}
 
-			for (var j = 0; j < player.rightEmitter.projectiles.Count; j++) {
-				var projectile = player.rightEmitter.projectiles[j];
-				var targets = projectile.collider.targets;
+				for (var j = 0; j < player.rightEmitter.projectiles.Count; j++) {
+					var projectile = player.rightEmitter.projectiles[j];
+					var targets = projectile.collider.targets;
 
-				if (targets.Contains(testNPC.collider)) targets.Remove(testNPC.collider);
-			}
+					if (targets.Contains(testNPC.collider)) targets.Remove(testNPC.collider);
+				}
 
-			for (var k = 0; k < player.leftEmitter.projectiles.Count; k++) {
-				var projectile = player.leftEmitter.projectiles[k];
-				var targets = projectile.collider.targets;
+				for (var k = 0; k < player.leftEmitter.projectiles.Count; k++) {
+					var projectile = player.leftEmitter.projectiles[k];
+					var targets = projectile.collider.targets;
 
-				if (!testNPC.disposed) targets.Add(testNPC.collider);
-			}
+					if (!testNPC.disposed) targets.Add(testNPC.collider);
+				}
 
-			for (var l = 0; l < player.rightEmitter.projectiles.Count; l++) {
-				var projectile = player.rightEmitter.projectiles[l];
-				var targets = projectile.collider.targets;
+				for (var l = 0; l < player.rightEmitter.projectiles.Count; l++) {
+					var projectile = player.rightEmitter.projectiles[l];
+					var targets = projectile.collider.targets;
 
-				if (!testNPC.disposed) targets.Add(testNPC.collider);
+					if (!testNPC.disposed) targets.Add(testNPC.collider);
+				}
 			}
 		}
 
