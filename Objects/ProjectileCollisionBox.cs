@@ -7,9 +7,7 @@ namespace FarBeyond.Objects {
 	public class ProjectileCollisionBox : CollisionBox {
 		public float damage;
 
-		public ProjectileCollisionBox(Entity parent, Vector2f position, Vector2f size, float damage, Color color) : base(parent, position, size, color) {
-			this.damage = damage;
-		}
+		public ProjectileCollisionBox(Entity parent, Vector2f position, Vector2f size, Color color) : base(parent, position, size, color) { }
 
 		public override void OnColliderEnter(CollisionBox collided) {
 			var obj = collided.GetParent();

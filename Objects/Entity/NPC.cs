@@ -10,13 +10,19 @@ namespace FarBeyond.Objects.Entities {
 		IntRect spriteRect;
 		Sprite sprite;
 
+		public AIState state;
+
+		// TODO: replace enums with registry entries
+		public enum AIState {
+			Wander,
+		}
+
 		public enum NPCType {
 			Civ,
 			Pirate,
 			Security
 		}
 
-		// TODO: replace enum with NPC registry
 		public NPC(Vector2f position, NPCType type) : base(position) {
 			this.position = position;
 			angle = 0;
@@ -54,12 +60,22 @@ namespace FarBeyond.Objects.Entities {
 			collider.position = position;
 			collider.Update(deltaTime);
 
+			StateMachine(state);
+
 			if (health <= 0) Dispose();
 		}
 
 		protected override void OnDispose() {
 			collider.Dispose();
 			base.OnDispose();
+		}
+
+		// TODO: Replace with registry
+		protected virtual void StateMachine(AIState state) {
+			switch (state) {
+				case AIState.Wander:
+					break;
+			}
 		}
 	}
 }
