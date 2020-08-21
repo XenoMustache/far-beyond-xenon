@@ -8,7 +8,7 @@ using Xenon.Common.Utilities;
 
 namespace FarBeyond.Objects {
 	public class ProjectileEmitter : GameObject {
-		public float angle;
+		public float angle, damage;
 		public Vector2f inputPosition, position, offset;
 
 		public List<Projectile> projectiles;
@@ -81,10 +81,9 @@ namespace FarBeyond.Objects {
 					pos.X = offset.Y * (float)Math.Sin(MiscUtils.DegToRad(-angle)) + position.X;
 					pos.Y = offset.Y * (float)Math.Cos(MiscUtils.DegToRad(-angle)) + position.Y;
 
-					var projectile = new Projectile(pos, Projectile.ProjectileType.player, angle);
+					var projectile = new Projectile(pos, Projectile.ProjectileType.player, angle, damage);
 					projectile.speed = 200;
 					projectile.lifeTime = 5000;
-					projectile.damage = 10;
 
 					projectiles.Add(projectile);
 					break;

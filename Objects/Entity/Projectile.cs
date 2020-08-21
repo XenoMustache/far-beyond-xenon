@@ -6,7 +6,7 @@ using static System.Math;
 
 namespace FarBeyond.Objects.Entities {
 	public class Projectile : Entity {
-		public float speed, lifeTime = 1000, damage = 10;
+		public float speed, lifeTime = 1000, damage;
 		public bool decay = true;
 		Clock disposeTimer;
 
@@ -21,7 +21,8 @@ namespace FarBeyond.Objects.Entities {
 		Sprite sprite;
 		IntRect spriteRect;
 
-		public Projectile(Vector2f position, ProjectileType type, float angle) : base(position) {
+		public Projectile(Vector2f position, ProjectileType type, float angle, float damage) : base(position) {
+			this.damage = damage;
 			this.angle = angle;
 			this.position = position;
 

@@ -25,6 +25,9 @@ namespace FarBeyond.Objects.Entities {
 			rightEmitter = new ProjectileEmitter(position, Color.White);
 			sprite = new Sprite(AssetRegistry.civShipsTexture, spriteRect);
 
+			leftEmitter.damage = 20;
+			rightEmitter.damage = 20;
+
 			rotationSpeed = defaultRotationSpeed;
 
 			cam.camZoom = 0.5f;

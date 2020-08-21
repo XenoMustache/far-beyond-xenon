@@ -4,7 +4,6 @@ using FarBeyond.Objects;
 using FarBeyond.Registry;
 using FarBeyond.Objects.Entities;
 using static FarBeyond.Objects.Entities.Projectile;
-using System;
 
 namespace FarBeyond {
 	public class FarBeyond : Game {
@@ -37,7 +36,7 @@ namespace FarBeyond {
 
 			testNPC = new NPC(new Vector2f(-32, 0), NPC.NPCType.Civ);
 			player = new Player(new Vector2f(0, 0));
-			testProj = new Projectile(new Vector2f(32, 0), ProjectileType.player, 0);
+			testProj = new Projectile(new Vector2f(32, 0), ProjectileType.player, 0, 10);
 
 			testProj.decay = false;
 
