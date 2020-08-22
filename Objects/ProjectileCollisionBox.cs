@@ -17,5 +17,14 @@ namespace FarBeyond.Objects {
 			Logger.Print($"Object health now {obj.health}");
 			parent.Dispose();
 		}
+
+		public override void Update(double deltaTime) {
+			base.Update(deltaTime);
+
+			for (var i = 0; i < targets.Count; i++) {
+				if (targets.Contains(targets[i]))
+					targets.Remove(targets[i]);
+			}
+		}
 	}
 }
