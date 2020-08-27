@@ -6,13 +6,15 @@ using Xenon.Common.State;
 
 namespace FarBeyond.States {
 	public class Sandbox : GameState {
-		public float mapWidth = 256, mapHeight = 256;
+		public Vector2f mapDimensions;
 
 		RectangleShape mapBounds;
 		Player player;
 		NPC testNPC;
 
 		public Sandbox(RenderWindow window) : base(window) {
+			mapDimensions = new Vector2f(256, 256);
+
 			window.KeyPressed += (s, e) => {
 				if (e.Code == SFML.Window.Keyboard.Key.Space) {
 					player.leftEmitter.Fire(ProjectileEmitter.ProjectileType.playerShot);
@@ -20,7 +22,7 @@ namespace FarBeyond.States {
 				}
 			};
 
-			mapBounds = new RectangleShape(new Vector2f(mapWidth * 2, mapHeight * 2));
+			mapBounds = new RectangleShape(mapDimensions * 2);
 			testNPC = new NPC(new Vector2f(-32, 0), NPC.NPCType.Civ);
 			player = new Player(new Vector2f(0, 0));
 
@@ -30,6 +32,8 @@ namespace FarBeyond.States {
 			mapBounds.OutlineThickness = 0.5f;
 
 			testNPC.health = 100;
+			testNPC.bounds = mapDimensions;
+
 			player.health = 100;
 
 			Objects.Add(player);

@@ -4,11 +4,14 @@ using SFML.System;
 
 namespace FarBeyond.Objects.Entities {
 	public class NPC : Entity {
+		public Vector2f bounds;
+
 		float angle;
 		int spriteIndex;
 		Texture imageIndex;
 		IntRect spriteRect;
 		Sprite sprite;
+		Vector2f travelPoint;
 
 		public AIState state;
 
