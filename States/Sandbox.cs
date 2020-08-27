@@ -6,6 +6,8 @@ using Xenon.Common.State;
 
 namespace FarBeyond.States {
 	public class Sandbox : GameState {
+		public float mapWidth = 256, mapHeight = 256;
+
 		Player player;
 		NPC testNPC;
 
