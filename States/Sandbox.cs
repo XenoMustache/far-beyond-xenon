@@ -33,11 +33,12 @@ namespace FarBeyond.States {
 
 			testNPC.health = 100;
 			testNPC.bounds = mapDimensions;
+			testNPC.state = NPC.AIState.Wander;
 
 			player.health = 100;
 
-			Objects.Add(player);
 			Objects.Add(testNPC);
+			Objects.Add(player);
 		}
 
 		public override void Update(double deltaTime) {

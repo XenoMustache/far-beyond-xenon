@@ -41,7 +41,6 @@ namespace FarBeyond.Objects.Entities {
 		public override void Update(double deltaTime) {
 			var move = Input.GetKey(SFML.Window.Keyboard.Key.W, true);
 			var rotate = Input.GetKey(SFML.Window.Keyboard.Key.D) - Input.GetKey(SFML.Window.Keyboard.Key.A);
-			var a = MiscUtils.DegToRad(rotate);
 
 			if (move) {
 				if (speed < defaultSpeed) speed = defaultSpeed;
@@ -53,7 +52,7 @@ namespace FarBeyond.Objects.Entities {
 				if (rotationSpeed > defaultRotationSpeed) rotationSpeed -= rotationDrag;
 			}
 
-			angle += a * rotationSpeed;
+			angle += rotate * rotationSpeed.DegToRad();
 			sprite.Rotation += rotate * rotationSpeed;
 
 			position.X += (float)Sin(moveAngle) * speed * (float)deltaTime;

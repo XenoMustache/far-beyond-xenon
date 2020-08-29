@@ -1,19 +1,27 @@
 ﻿using FarBeyond.Registry;
+using RandomDataGenerator.FieldOptions;
+using RandomDataGenerator.Randomizers;
 using SFML.Graphics;
 using SFML.System;
+using System;
+using Xenon.Common.Utilities;
 
 namespace FarBeyond.Objects.Entities {
 	public class NPC : Entity {
+		public AIState state;
+
 		public Vector2f bounds;
 
-		float angle;
-		int spriteIndex;
+		float defaultRotationSpeed = 0.75f, acceleratedRotation = 1.5f, rotationDrag = 0.1f, defaultSpeed = 25;
+		float angle, rotationSpeed, speed;
+		int spriteIndex, rotate;
+		bool hasPoint, facingPoint;
 		Texture imageIndex;
 		IntRect spriteRect;
 		Sprite sprite;
-		Vector2f travelPoint;
-
-		public AIState state;
+		CircleShape point;
+		Vector2f wanderPoint;
+		RandomizerNumber<float> randX, randY;
 
 		// TODO: replace enums with registry entries
 		public enum AIState {
@@ -28,6 +36,8 @@ namespace FarBeyond.Objects.Entities {
 
 		public NPC(Vector2f position, NPCType type) : base(position) {
 			this.position = position;
+
+			point = new CircleShape(1);
 			angle = 0;
 
 			switch (type) {
@@ -53,6 +63,7 @@ namespace FarBeyond.Objects.Entities {
 
 		public override void Render(RenderWindow window) {
 			window.Draw(sprite);
+			window.Draw(point);
 
 			collider.Render(window);
 		}
@@ -63,7 +74,57 @@ namespace FarBeyond.Objects.Entities {
 			collider.position = position;
 			collider.Update(deltaTime);
 
-			StateMachine(state);
+			switch (state) {
+				case AIState.Wander:
+					if (!hasPoint) {
+						point.Origin = new Vector2f(point.Radius, point.Radius);
+						point.FillColor = Color.Transparent;
+						point.OutlineColor = Color.Red;
+						point.OutlineThickness = 0.5f;
+
+						randX = new RandomizerNumber<float>(new FieldOptionsFloat() { Max = bounds.X, Min = -bounds.X });
+						randY = new RandomizerNumber<float>(new FieldOptionsFloat() { Max = bounds.Y, Min = -bounds.Y });
+
+						wanderPoint = new Vector2f((float)randX.Generate(), (float)randY.Generate());
+						hasPoint = true;
+						facingPoint = false;
+
+						point.Position = wanderPoint;
+
+						var dist = wanderPoint.GetDistance(position);
+						var dir = wanderPoint.GetDirection(position);
+
+						Logger.Print(dist.ToString());
+						Logger.Print(dir.ToString());
+					} else {
+						var dist = position.GetDistance(wanderPoint);
+						var dir = wanderPoint.GetDirection(position);
+
+						if (!facingPoint) {
+							rotate = MiscUtils.FindTurnSideDeg(angle.RadToDeg(), dir.RadToDeg());
+							speed = 0;
+						} else {
+							speed = defaultSpeed;
+						}
+
+						if (rotate == 0) facingPoint = true;
+
+						//Logger.Print(angle.RadToDeg().ToString());
+						//Logger.Print(dist.ToString());
+
+						if (dist < 10) hasPoint = false;
+						Logger.Print(dist.ToString());
+
+						rotationSpeed = defaultRotationSpeed;
+
+						angle += rotate * rotationSpeed.DegToRad();
+						sprite.Rotation += rotate * rotationSpeed;
+					}
+					break;
+			}
+
+			position.X += (float)Math.Sin(angle) * speed * (float)deltaTime;
+			position.Y += (float)-Math.Cos(angle) * speed * (float)deltaTime;
 
 			if (health <= 0) Dispose();
 		}
@@ -71,14 +132,6 @@ namespace FarBeyond.Objects.Entities {
 		protected override void OnDispose() {
 			collider.Dispose();
 			base.OnDispose();
-		}
-
-		// TODO: Replace with registry
-		protected virtual void StateMachine(AIState state) {
-			switch (state) {
-				case AIState.Wander:
-					break;
-			}
 		}
 	}
 }

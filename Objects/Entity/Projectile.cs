@@ -51,7 +51,7 @@ namespace FarBeyond.Objects.Entities {
 		public override void Update(double deltaTime) {
 			var life = disposeTimer.ElapsedTime.AsMilliseconds();
 
-			var a = MiscUtils.DegToRad(angle);
+			var a = angle.DegToRad();
 
 			position.X += (float)Sin(a) * speed * (float)deltaTime;
 			position.Y += (float)-Cos(a) * speed * (float)deltaTime;
