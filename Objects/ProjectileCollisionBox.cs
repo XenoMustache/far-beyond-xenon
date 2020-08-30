@@ -20,10 +20,7 @@ namespace FarBeyond.Objects {
 		public override void Update(double deltaTime) {
 			base.Update(deltaTime);
 
-			for (var i = 0; i < targets.Count; i++) {
-				if (targets.Contains(targets[i]))
-					targets.Remove(targets[i]);
-			}
+			targets.Clear();
 		}
 	}
 }

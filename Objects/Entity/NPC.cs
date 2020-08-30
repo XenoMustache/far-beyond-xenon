@@ -4,7 +4,6 @@ using RandomDataGenerator.Randomizers;
 using SFML.Graphics;
 using SFML.System;
 using System;
-using System.Threading;
 using Xenon.Common.Utilities;
 
 namespace FarBeyond.Objects.Entities {
@@ -55,11 +54,12 @@ namespace FarBeyond.Objects.Entities {
 			collider = new CollisionBox(this, position, new Vector2f(14, 14), Color.Red);
 
 			spriteRect = new IntRect(new Vector2i(0 + (32 * spriteIndex), 0), new Vector2i(32, 32));
-			sprite = new Sprite(imageIndex, spriteRect);
 
-			sprite.Position = position;
-			sprite.Rotation = angle;
-			sprite.Origin = new Vector2f(16, 16);
+			sprite = new Sprite(imageIndex, spriteRect) {
+				Position = position,
+				Rotation = angle,
+				Origin = new Vector2f(16, 16)
+			};
 		}
 
 		public override void Render(RenderWindow window) {

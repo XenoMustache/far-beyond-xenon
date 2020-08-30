@@ -23,12 +23,13 @@ namespace FarBeyond.Objects {
 			this.size = size;
 
 			targets = new List<CollisionBox>();
-			colliderRect = new RectangleShape(size);
 
-			colliderRect.Origin = size / 2;
-			colliderRect.FillColor = Color.Transparent;
-			colliderRect.OutlineColor = color;
-			colliderRect.OutlineThickness = 0.5f;
+			colliderRect = new RectangleShape(size) {
+				Origin = size / 2,
+				FillColor = Color.Transparent,
+				OutlineColor = color,
+				OutlineThickness = 0.5F
+			};
 		}
 
 		public virtual void OnColliderEnter(CollisionBox collided) {
@@ -44,6 +45,7 @@ namespace FarBeyond.Objects {
 
 			for (var i = 0; i < targets.Count; i++) {
 				var box = targets[i];
+
 				if (!box.parent.disposed) {
 					if (colliderRect.GetGlobalBounds().Intersects(box.colliderRect.GetGlobalBounds()) && !hasEntered) {
 						hasEntered = true;
