@@ -44,7 +44,7 @@ namespace FarBeyond.Objects {
 			for (var i = 0; i < targets.Count; i++) {
 				var box = targets[i];
 
-				if (!box.parent.disposed) {
+				if (!box.parent.disposed && !disposed) {
 					if (colliderRect.GetGlobalBounds().Intersects(box.colliderRect.GetGlobalBounds()) && !hasEntered) {
 						hasEntered = true;
 						OnColliderEnter(box);

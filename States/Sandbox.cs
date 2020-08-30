@@ -58,16 +58,16 @@ namespace FarBeyond.States {
 				var projectile = player.leftEmitter.projectiles[k];
 				var targets = projectile.collider.targets;
 
-				if (!testNPC.disposed) targets.Add(testNPC.collider);
-				if (!testNPC2.disposed) targets.Add(testNPC2.collider);
+				if (!testNPC.collider.disposed) targets.Add(testNPC.collider);
+				if (!testNPC2.collider.disposed) targets.Add(testNPC2.collider);
 			}
 
 			for (var l = 0; l < player.rightEmitter.projectiles.Count; l++) {
 				var projectile = player.rightEmitter.projectiles[l];
 				var targets = projectile.collider.targets;
 
-				if (!testNPC.disposed) targets.Add(testNPC.collider);
-				if (!testNPC2.disposed) targets.Add(testNPC2.collider);
+				if (!testNPC.collider.disposed) targets.Add(testNPC.collider);
+				if (!testNPC2.collider.disposed) targets.Add(testNPC2.collider);
 			}
 
 			base.Update(deltaTime);

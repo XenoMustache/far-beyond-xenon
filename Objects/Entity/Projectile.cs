@@ -42,10 +42,7 @@ namespace FarBeyond.Objects.Entities {
 				Rotation = this.angle
 			};
 
-			collider = new ProjectileCollisionBox(this, position, new Vector2f(12, 12), Color.White);
-
-			var c = (ProjectileCollisionBox)collider;
-			c.damage = damage;
+			collider = new ProjectileCollisionBox(this, position, new Vector2f(12, 12), Color.White) { damage = this.damage };
 		}
 
 		public override void Update(double deltaTime) {
@@ -59,7 +56,7 @@ namespace FarBeyond.Objects.Entities {
 			sprite.Position = position;
 			sprite.Rotation = angle;
 
-			if (collider != null) {
+			if (!collider.disposed) {
 				collider.position = position;
 				collider.Update(deltaTime);
 			}
@@ -71,12 +68,13 @@ namespace FarBeyond.Objects.Entities {
 
 		public override void Render(RenderWindow window) {
 			window.Draw(sprite);
-			if (collider != null) collider.Render(window);
+			if (!collider.disposed) collider.Render(window);
 		}
 
 		protected override void OnDispose() {
 			disposeTimer.Dispose();
 			sprite.Dispose();
+			collider.Dispose();
 
 			base.OnDispose();
 		}
