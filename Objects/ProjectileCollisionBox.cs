@@ -1,7 +1,6 @@
 ﻿using FarBeyond.Objects.Entities;
 using SFML.Graphics;
 using SFML.System;
-using Xenon.Common.Utilities;
 
 namespace FarBeyond.Objects {
 	public class ProjectileCollisionBox : CollisionBox {

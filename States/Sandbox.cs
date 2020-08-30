@@ -53,37 +53,21 @@ namespace FarBeyond.States {
 
 		public override void Update(double deltaTime) {
 			// TODO: Clean this up
-			if (!testNPC.disposed) {
-				for (var k = 0; k < player.leftEmitter.projectiles.Count; k++) {
-					var projectile = player.leftEmitter.projectiles[k];
-					var targets = projectile.collider.targets;
+			for (var k = 0; k < player.leftEmitter.projectiles.Count; k++) {
+				var projectile = player.leftEmitter.projectiles[k];
+				var targets = projectile.collider.targets;
 
-					targets.Add(testNPC.collider);
-				}
-
-				for (var l = 0; l < player.rightEmitter.projectiles.Count; l++) {
-					var projectile = player.rightEmitter.projectiles[l];
-					var targets = projectile.collider.targets;
-
-					targets.Add(testNPC.collider);
-				}
+				if (!testNPC.disposed) targets.Add(testNPC.collider);
+				if (!testNPC2.disposed) targets.Add(testNPC2.collider);
 			}
 
-			//if (!testNPC2.disposed) {
-			//	for (var k = 0; k < player.leftEmitter.projectiles.Count; k++) {
-			//		var projectile = player.leftEmitter.projectiles[k];
-			//		var targets = projectile.collider.targets;
+			for (var l = 0; l < player.rightEmitter.projectiles.Count; l++) {
+				var projectile = player.rightEmitter.projectiles[l];
+				var targets = projectile.collider.targets;
 
-			//		targets.Add(testNPC2.collider);
-			//	}
-
-			//	for (var l = 0; l < player.rightEmitter.projectiles.Count; l++) {
-			//		var projectile = player.rightEmitter.projectiles[l];
-			//		var targets = projectile.collider.targets;
-
-			//		targets.Add(testNPC2.collider);
-			//	}
-			//}
+				if (!testNPC.disposed) targets.Add(testNPC.collider);
+				if (!testNPC2.disposed) targets.Add(testNPC2.collider);
+			}
 
 			base.Update(deltaTime);
 		}

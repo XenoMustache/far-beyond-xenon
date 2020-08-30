@@ -21,12 +21,9 @@ namespace FarBeyond.Objects.Entities {
 			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i(32, 32));
 
 			cam = new Camera();
-			leftEmitter = new ProjectileEmitter(position, Color.White);
-			rightEmitter = new ProjectileEmitter(position, Color.White);
+			leftEmitter = new ProjectileEmitter(position, Color.White) { damage = 20 };
+			rightEmitter = new ProjectileEmitter(position, Color.White) { damage = 20 };
 			sprite = new Sprite(AssetRegistry.civShipsTexture, spriteRect);
-
-			leftEmitter.damage = 20;
-			rightEmitter.damage = 20;
 
 			rotationSpeed = defaultRotationSpeed;
 

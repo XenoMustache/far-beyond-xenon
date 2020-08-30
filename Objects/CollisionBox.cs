@@ -1,10 +1,8 @@
 ﻿using FarBeyond.Objects.Entities;
 using SFML.Graphics;
 using SFML.System;
-using System;
 using System.Collections.Generic;
 using Xenon.Common;
-using Xenon.Common.Utilities;
 
 namespace FarBeyond.Objects {
 	public class CollisionBox : GameObject {
@@ -57,6 +55,7 @@ namespace FarBeyond.Objects {
 				}
 			}
 
+			targets.Clear();
 			display = FarBeyond.showHitboxes;
 		}
 
