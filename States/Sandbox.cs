@@ -33,13 +33,13 @@ namespace FarBeyond.States {
 			testNPC = new NPC(new Vector2f(-32, 0), NPC.NPCType.Civ) {
 				health = 100,
 				bounds = mapDimensions,
-				state = NPC.AIState.Idle
+				state = NPC.AIState.Wander
 			};
 
 			testNPC2 = new NPC(new Vector2f(32, 0), NPC.NPCType.Civ) {
 				health = 100,
 				bounds = mapDimensions,
-				state = NPC.AIState.Idle
+				state = NPC.AIState.Wander
 			};
 
 			player = new Player(new Vector2f(0, 0)) {
@@ -53,6 +53,7 @@ namespace FarBeyond.States {
 
 		public override void Update(double deltaTime) {
 			// TODO: Clean this up
+			// TODO: Fix the former list issue
 			for (var k = 0; k < player.leftEmitter.projectiles.Count; k++) {
 				var projectile = player.leftEmitter.projectiles[k];
 				var targets = projectile.collider.targets;

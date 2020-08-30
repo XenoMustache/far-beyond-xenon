@@ -36,11 +36,11 @@ namespace FarBeyond.Objects.Entities {
 				case ProjectileType.pirate: spriteRect.Top = 32; break;
 			}
 
-			sprite = new Sprite(AssetRegistry.bulletsTexture, spriteRect);
-
-			sprite.Origin = new Vector2f(spriteRect.Width / 2, spriteRect.Height / 2);
-			sprite.Position = position;
-			sprite.Rotation = angle;
+			sprite = new Sprite(AssetRegistry.bulletsTexture, spriteRect) {
+				Origin = new Vector2f(spriteRect.Width / 2, spriteRect.Height / 2),
+				Position = this.position,
+				Rotation = this.angle
+			};
 
 			collider = new ProjectileCollisionBox(this, position, new Vector2f(12, 12), Color.White);
 

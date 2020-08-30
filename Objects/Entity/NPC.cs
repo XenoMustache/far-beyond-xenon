@@ -21,7 +21,6 @@ namespace FarBeyond.Objects.Entities {
 		Sprite sprite;
 		CircleShape point;
 		Vector2f seekingPoint;
-		RandomizerNumber<float> randX, randY;
 
 		// TODO: replace enums with registry entries
 		public enum AIState {
@@ -79,21 +78,21 @@ namespace FarBeyond.Objects.Entities {
 				case AIState.Idle: break;
 				case AIState.Wander:
 					if (!hasPoint) {
-						point = new CircleShape(1);
-
-						point.Origin = new Vector2f(point.Radius, point.Radius);
-						point.FillColor = Color.Transparent;
-						point.OutlineColor = Color.Red;
-						point.OutlineThickness = 0.5f;
-
-						randX = new RandomizerNumber<float>(new FieldOptionsFloat() { Max = bounds.X, Min = -bounds.X });
-						randY = new RandomizerNumber<float>(new FieldOptionsFloat() { Max = bounds.Y, Min = -bounds.Y });
+						var randX = new RandomizerNumber<float>(new FieldOptionsFloat() { Max = bounds.X, Min = -bounds.X });
+						var randY = new RandomizerNumber<float>(new FieldOptionsFloat() { Max = bounds.Y, Min = -bounds.Y });
 
 						seekingPoint = new Vector2f((float)randX.Generate(), (float)randY.Generate());
 						hasPoint = true;
 						facingPoint = false;
 
-						point.Position = seekingPoint;
+						point = new CircleShape(1) {
+							Position = seekingPoint,
+							FillColor = Color.Transparent,
+							OutlineColor = Color.Red,
+							OutlineThickness = 0.5f
+						};
+
+						point.Origin = new Vector2f(point.Radius, point.Radius);
 					} else {
 						var dist = position.GetDistance(seekingPoint);
 						var dir = seekingPoint.GetDirection(position);
