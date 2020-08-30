@@ -14,7 +14,6 @@ namespace FarBeyond.Objects {
 			obj.health -= damage;
 
 			base.OnColliderEnter(collided);
-			Logger.Print($"Object health now {obj.health}");
 			parent.Dispose();
 		}
 

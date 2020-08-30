@@ -10,7 +10,7 @@ namespace FarBeyond.States {
 
 		RectangleShape mapBounds;
 		Player player;
-		NPC testNPC;
+		NPC testNPC, testNPC2;
 
 		public Sandbox(RenderWindow window) : base(window) {
 			mapDimensions = new Vector2f(256, 256);
@@ -22,22 +22,32 @@ namespace FarBeyond.States {
 				}
 			};
 
-			mapBounds = new RectangleShape(mapDimensions * 2);
-			testNPC = new NPC(new Vector2f(-32, 0), NPC.NPCType.Civ);
-			player = new Player(new Vector2f(0, 0));
+			mapBounds = new RectangleShape(mapDimensions * 2) {
+				FillColor = Color.Transparent,
+				OutlineColor = Color.Red,
+				OutlineThickness = 0.5F
+			};
 
 			mapBounds.Origin = mapBounds.Size / 2;
-			mapBounds.FillColor = Color.Transparent;
-			mapBounds.OutlineColor = Color.Red;
-			mapBounds.OutlineThickness = 0.5f;
 
-			testNPC.health = 100;
-			testNPC.bounds = mapDimensions;
-			testNPC.state = NPC.AIState.Wander;
+			testNPC = new NPC(new Vector2f(-32, 0), NPC.NPCType.Civ) {
+				health = 100,
+				bounds = mapDimensions,
+				state = NPC.AIState.Idle
+			};
 
-			player.health = 100;
+			testNPC2 = new NPC(new Vector2f(32, 0), NPC.NPCType.Civ) {
+				health = 100,
+				bounds = mapDimensions,
+				state = NPC.AIState.Idle
+			};
+
+			player = new Player(new Vector2f(0, 0)) {
+				health = 100
+			};
 
 			Objects.Add(testNPC);
+			Objects.Add(testNPC2);
 			Objects.Add(player);
 		}
 

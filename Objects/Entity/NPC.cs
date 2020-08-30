@@ -4,6 +4,7 @@ using RandomDataGenerator.Randomizers;
 using SFML.Graphics;
 using SFML.System;
 using System;
+using System.Threading;
 using Xenon.Common.Utilities;
 
 namespace FarBeyond.Objects.Entities {
@@ -12,7 +13,7 @@ namespace FarBeyond.Objects.Entities {
 
 		public Vector2f bounds;
 
-		float defaultRotationSpeed = 0.75f, acceleratedRotation = 1.5f, rotationDrag = 0.1f, defaultSpeed = 25;
+		float defaultRotationSpeed = 0.75f, defaultSpeed = 25;
 		float angle, rotationSpeed, speed;
 		int spriteIndex, rotate;
 		bool hasPoint, facingPoint;
@@ -20,11 +21,12 @@ namespace FarBeyond.Objects.Entities {
 		IntRect spriteRect;
 		Sprite sprite;
 		CircleShape point;
-		Vector2f wanderPoint;
+		Vector2f seekingPoint;
 		RandomizerNumber<float> randX, randY;
 
 		// TODO: replace enums with registry entries
 		public enum AIState {
+			Idle,
 			Wander,
 		}
 
@@ -37,7 +39,6 @@ namespace FarBeyond.Objects.Entities {
 		public NPC(Vector2f position, NPCType type) : base(position) {
 			this.position = position;
 
-			point = new CircleShape(1);
 			angle = 0;
 
 			switch (type) {
@@ -63,7 +64,7 @@ namespace FarBeyond.Objects.Entities {
 
 		public override void Render(RenderWindow window) {
 			window.Draw(sprite);
-			window.Draw(point);
+			if (FarBeyond.showHitboxes && point != null) window.Draw(point);
 
 			collider.Render(window);
 		}
@@ -75,8 +76,11 @@ namespace FarBeyond.Objects.Entities {
 			collider.Update(deltaTime);
 
 			switch (state) {
+				case AIState.Idle: break;
 				case AIState.Wander:
 					if (!hasPoint) {
+						point = new CircleShape(1);
+
 						point.Origin = new Vector2f(point.Radius, point.Radius);
 						point.FillColor = Color.Transparent;
 						point.OutlineColor = Color.Red;
@@ -85,20 +89,14 @@ namespace FarBeyond.Objects.Entities {
 						randX = new RandomizerNumber<float>(new FieldOptionsFloat() { Max = bounds.X, Min = -bounds.X });
 						randY = new RandomizerNumber<float>(new FieldOptionsFloat() { Max = bounds.Y, Min = -bounds.Y });
 
-						wanderPoint = new Vector2f((float)randX.Generate(), (float)randY.Generate());
+						seekingPoint = new Vector2f((float)randX.Generate(), (float)randY.Generate());
 						hasPoint = true;
 						facingPoint = false;
 
-						point.Position = wanderPoint;
-
-						var dist = wanderPoint.GetDistance(position);
-						var dir = wanderPoint.GetDirection(position);
-
-						Logger.Print(dist.ToString());
-						Logger.Print(dir.ToString());
+						point.Position = seekingPoint;
 					} else {
-						var dist = position.GetDistance(wanderPoint);
-						var dir = wanderPoint.GetDirection(position);
+						var dist = position.GetDistance(seekingPoint);
+						var dir = seekingPoint.GetDirection(position);
 
 						if (!facingPoint) {
 							rotate = MiscUtils.FindTurnSideDeg(angle.RadToDeg(), dir.RadToDeg());
@@ -108,15 +106,9 @@ namespace FarBeyond.Objects.Entities {
 						}
 
 						if (rotate == 0) facingPoint = true;
-
-						//Logger.Print(angle.RadToDeg().ToString());
-						//Logger.Print(dist.ToString());
-
 						if (dist < 10) hasPoint = false;
-						Logger.Print(dist.ToString());
 
 						rotationSpeed = defaultRotationSpeed;
-
 						angle += rotate * rotationSpeed.DegToRad();
 						sprite.Rotation += rotate * rotationSpeed;
 					}
