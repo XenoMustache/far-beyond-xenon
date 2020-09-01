@@ -78,6 +78,7 @@ namespace FarBeyond.Objects.Entities {
 			switch (state) {
 				case AIState.Wander:
 					if (!hasPoint) {
+						Logger.Print("Wander");
 						var randX = new RandomizerNumber<float>(new FieldOptionsFloat() { Max = bounds.X, Min = -bounds.X });
 						var randY = new RandomizerNumber<float>(new FieldOptionsFloat() { Max = bounds.Y, Min = -bounds.Y });
 
@@ -110,28 +111,27 @@ namespace FarBeyond.Objects.Entities {
 						rotationSpeed = defaultRotationSpeed;
 						angle += rotate * rotationSpeed.DegToRad();
 						sprite.Rotation += rotate * rotationSpeed;
+
+						if (isHostile && position.GetDistance(playerPosition) < 128) state = AIState.Attack;
 					}
 					break;
-				//case AIState.Attack:
-				//	seekingPoint = playerPosition;
+				case AIState.Attack:
+					seekingPoint = playerPosition;
 
-				//	var distAgg = position.GetDistance(seekingPoint);
-				//	var dirAgg = seekingPoint.GetDirection(position);
+					var distAg = position.GetDistance(seekingPoint);
+					var dirAg = seekingPoint.GetDirection(position);
 
-				//	if (!facingPoint) {
-				//		rotate = MiscUtils.FindTurnSideDeg(angle.RadToDeg(), dirAgg.RadToDeg());
-				//		speed = 0;
-				//	} else {
-				//		speed = defaultSpeed;
-				//	}
+					rotate = MiscUtils.FindTurnSideDeg(angle.RadToDeg(), dirAg.RadToDeg());
+					if (distAg < 64) 
+						speed = 0; else speed = defaultSpeed * 2;
+					if (distAg > 256)
+						state = AIState.Wander;
 
-				//	if (rotate == 0) facingPoint = true;
-					
-				//	rotationSpeed = defaultRotationSpeed;
-				//	angle += rotate * rotationSpeed.DegToRad();
-				//	sprite.Rotation += rotate * rotationSpeed;
+					rotationSpeed = defaultRotationSpeed;
+					angle += rotate * rotationSpeed.DegToRad();
+					sprite.Rotation += rotate * rotationSpeed;
 
-				//	break;
+					break;
 			}
 
 			position.X += (float)Math.Sin(angle) * speed * (float)deltaTime;

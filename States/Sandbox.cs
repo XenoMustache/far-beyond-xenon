@@ -72,6 +72,8 @@ namespace FarBeyond.States {
 				if (!testNPC2.disposed) targets.Add(testNPC2.collider);
 			}
 
+			testNPC2.playerPosition = player.position;
+
 			base.Update(deltaTime);
 		}
 
