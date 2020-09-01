@@ -8,9 +8,9 @@ using Xenon.Common.Utilities;
 
 namespace FarBeyond.Objects.Entities {
 	public class NPC : Entity {
+		public bool isHostile;
 		public AIState state;
-
-		public Vector2f bounds;
+		public Vector2f bounds, playerPosition;
 
 		float defaultRotationSpeed = 0.75f, defaultSpeed = 25;
 		float angle, rotationSpeed, speed;
@@ -26,6 +26,7 @@ namespace FarBeyond.Objects.Entities {
 		public enum AIState {
 			Idle,
 			Wander,
+			Attack
 		}
 
 		public enum NPCType {
@@ -75,7 +76,6 @@ namespace FarBeyond.Objects.Entities {
 			collider.Update(deltaTime);
 
 			switch (state) {
-				case AIState.Idle: break;
 				case AIState.Wander:
 					if (!hasPoint) {
 						var randX = new RandomizerNumber<float>(new FieldOptionsFloat() { Max = bounds.X, Min = -bounds.X });
@@ -112,6 +112,26 @@ namespace FarBeyond.Objects.Entities {
 						sprite.Rotation += rotate * rotationSpeed;
 					}
 					break;
+				//case AIState.Attack:
+				//	seekingPoint = playerPosition;
+
+				//	var distAgg = position.GetDistance(seekingPoint);
+				//	var dirAgg = seekingPoint.GetDirection(position);
+
+				//	if (!facingPoint) {
+				//		rotate = MiscUtils.FindTurnSideDeg(angle.RadToDeg(), dirAgg.RadToDeg());
+				//		speed = 0;
+				//	} else {
+				//		speed = defaultSpeed;
+				//	}
+
+				//	if (rotate == 0) facingPoint = true;
+					
+				//	rotationSpeed = defaultRotationSpeed;
+				//	angle += rotate * rotationSpeed.DegToRad();
+				//	sprite.Rotation += rotate * rotationSpeed;
+
+				//	break;
 			}
 
 			position.X += (float)Math.Sin(angle) * speed * (float)deltaTime;

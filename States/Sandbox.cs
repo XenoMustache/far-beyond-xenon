@@ -3,6 +3,7 @@ using FarBeyond.Objects.Entities;
 using SFML.Graphics;
 using SFML.System;
 using Xenon.Common.State;
+using Xenon.Common.Utilities;
 
 namespace FarBeyond.States {
 	public class Sandbox : GameState {
@@ -39,7 +40,8 @@ namespace FarBeyond.States {
 			testNPC2 = new NPC(new Vector2f(32, 0), NPC.NPCType.Civ) {
 				health = 100,
 				bounds = mapDimensions,
-				state = NPC.AIState.Wander
+				state = NPC.AIState.Wander,
+				isHostile = true
 			};
 
 			player = new Player(new Vector2f(0, 0)) {
