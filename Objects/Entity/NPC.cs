@@ -16,6 +16,7 @@ namespace FarBeyond.Objects.Entities {
 		float angle, rotationSpeed, speed;
 		int spriteIndex, rotate;
 		bool hasPoint, facingPoint;
+		ProjectileEmitter emitter;
 		Texture imageIndex;
 		IntRect spriteRect;
 		Sprite sprite;
@@ -44,6 +45,7 @@ namespace FarBeyond.Objects.Entities {
 				case NPCType.Civ:
 					imageIndex = AssetRegistry.civShipsTexture;
 					spriteIndex = 1;
+					emitter = new ProjectileEmitter(position, Color.White) { damage = 20 };
 					break;
 				case NPCType.Security:
 					imageIndex = AssetRegistry.civShipsTexture;
@@ -66,6 +68,8 @@ namespace FarBeyond.Objects.Entities {
 			window.Draw(sprite);
 			if (FarBeyond.showHitboxes && point != null) window.Draw(point);
 
+			if (emitter != null) emitter.Render(window);
+
 			collider.Render(window);
 		}
 
@@ -78,7 +82,6 @@ namespace FarBeyond.Objects.Entities {
 			switch (state) {
 				case AIState.Wander:
 					if (!hasPoint) {
-						Logger.Print("Wander");
 						var randX = new RandomizerNumber<float>(new FieldOptionsFloat() { Max = bounds.X, Min = -bounds.X });
 						var randY = new RandomizerNumber<float>(new FieldOptionsFloat() { Max = bounds.Y, Min = -bounds.Y });
 
@@ -122,8 +125,9 @@ namespace FarBeyond.Objects.Entities {
 					var dirAg = seekingPoint.GetDirection(position);
 
 					rotate = MiscUtils.FindTurnSideDeg(angle.RadToDeg(), dirAg.RadToDeg());
-					if (distAg < 64) 
-						speed = 0; else speed = defaultSpeed * 2;
+					if (distAg < 64)
+						speed = 0;
+					else speed = defaultSpeed * 2;
 					if (distAg > 256)
 						state = AIState.Wander;
 
@@ -136,6 +140,14 @@ namespace FarBeyond.Objects.Entities {
 
 			position.X += (float)Math.Sin(angle) * speed * (float)deltaTime;
 			position.Y += (float)-Math.Cos(angle) * speed * (float)deltaTime;
+
+			if (emitter != null) {
+				emitter.angle += rotate * rotationSpeed;
+				emitter.inputPosition = position;
+				emitter.offset.X = 0;
+				emitter.offset.Y = -10;
+				emitter.Update(deltaTime);
+			}
 
 			if (health <= 0) Dispose();
 		}
