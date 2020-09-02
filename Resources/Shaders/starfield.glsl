@@ -4,6 +4,12 @@ uniform vec4 iMouse;
 
 #define NUM_LAYERS 2.
 
+void mainImage( out vec4 fragColor, in vec2 fragCoord );
+
+void main() {
+    mainImage(gl_FragColor, gl_FragCoord.xy);
+}
+
 mat2 Rot(float a) {
     float s=sin(a), c=cos(a);
     return mat2(c, -s, s, c);

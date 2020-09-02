@@ -1,4 +1,5 @@
-﻿using FarBeyond.Objects;
+﻿using FarBeyond.Effects;
+using FarBeyond.Objects;
 using FarBeyond.Objects.Entities;
 using SFML.Graphics;
 using SFML.System;
@@ -8,12 +9,17 @@ namespace FarBeyond.States {
 	public class Sandbox : GameState {
 		public Vector2f mapDimensions;
 
+		Clock backgroundClock;
+		Starfield background;
 		RectangleShape mapBounds;
 		Player player;
 		NPC testNPC, testNPC2;
 
 		public Sandbox(RenderWindow window) : base(window) {
 			mapDimensions = new Vector2f(256, 256);
+
+			backgroundClock = new Clock();
+			background = new Starfield();
 
 			window.KeyPressed += (s, e) => {
 				if (e.Code == SFML.Window.Keyboard.Key.Space) {
@@ -72,10 +78,15 @@ namespace FarBeyond.States {
 
 			testNPC2.playerPosition = player.position;
 
+			background.Update(backgroundClock.ElapsedTime.AsSeconds(), 0, 0);
+			background.playerPos = player.position;
+
 			base.Update(deltaTime);
 		}
 
 		public override void Render(RenderWindow window) {
+			window.Clear(Color.Blue);
+			window.Draw(background);
 			base.Render(window);
 
 			if (FarBeyond.showHitboxes)

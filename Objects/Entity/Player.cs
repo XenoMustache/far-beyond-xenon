@@ -2,7 +2,7 @@
 using SFML.Graphics;
 using SFML.System;
 using Xenon.Client;
-using Xenon.Client.UI;
+using Xenon.Client.Prefabs;
 using Xenon.Common.Utilities;
 using static System.Math;
 
