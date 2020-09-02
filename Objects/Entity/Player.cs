@@ -21,8 +21,17 @@ namespace FarBeyond.Objects.Entities {
 			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i(32, 32));
 
 			cam = new Camera();
-			leftEmitter = new ProjectileEmitter(position, Color.White) { damage = 20 };
-			rightEmitter = new ProjectileEmitter(position, Color.White) { damage = 20 };
+
+			leftEmitter = new ProjectileEmitter(position, Color.White) {
+				damage = 20,
+				offset = new Vector2f(-6.5f, -10)
+			};
+
+			rightEmitter = new ProjectileEmitter(position, Color.White) {
+				damage = 20,
+				offset = new Vector2f(6.5f, -10)
+			};
+
 			sprite = new Sprite(AssetRegistry.civShipsTexture, spriteRect);
 
 			rotationSpeed = defaultRotationSpeed;
@@ -62,14 +71,14 @@ namespace FarBeyond.Objects.Entities {
 
 			leftEmitter.angle += rotate * rotationSpeed;
 			leftEmitter.inputPosition = position;
-			leftEmitter.offset.X = -6.5f;
-			leftEmitter.offset.Y = -10;
+			//leftEmitter.offset.X = -6.5f;
+			//leftEmitter.offset.Y = -10;
 			leftEmitter.Update(deltaTime);
 
 			rightEmitter.angle += rotate * rotationSpeed;
 			rightEmitter.inputPosition = position;
-			rightEmitter.offset.X = 6.5f;
-			rightEmitter.offset.Y = -10;
+			//rightEmitter.offset.X = 6.5f;
+			//rightEmitter.offset.Y = -10;
 			rightEmitter.Update(deltaTime);
 
 			collider.position = position;
