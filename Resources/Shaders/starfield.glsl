@@ -1,3 +1,7 @@
+uniform float iTime;
+uniform vec3 iResolution;
+uniform vec4 iMouse;
+
 #define NUM_LAYERS 2.
 
 mat2 Rot(float a) {
