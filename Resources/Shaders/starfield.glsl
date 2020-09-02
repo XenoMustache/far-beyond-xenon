@@ -60,7 +60,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     	float depth = 0.2;
         
         float scale = 5.-i;
-        col += StarLayer(uv*scale+i*500.+M)*depth;
+        float glow = depth*0.75;
+        col += StarLayer(uv*scale+i*500.+M)*glow;
     }
     
     col = pow(col, vec3(.9));
