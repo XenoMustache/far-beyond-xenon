@@ -78,7 +78,7 @@ namespace FarBeyond.States {
 
 			testNPC2.playerPosition = player.position;
 
-			background.Update(backgroundClock.ElapsedTime.AsSeconds(), 0, 0);
+			background.Update(backgroundClock.ElapsedTime.AsSeconds());
 			background.playerPos = player.position;
 
 			base.Update(deltaTime);

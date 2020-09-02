@@ -12,7 +12,7 @@ namespace FarBeyond.Effects {
 		public RectangleShape rect;
 		private Shader shader;
 
-		public Starfield() : base("starfield") {
+		public Starfield() {
 			shader = AssetRegistry.starfield;
 
 			rect = new RectangleShape(new Vector2f(1920, 1080));
@@ -24,7 +24,7 @@ namespace FarBeyond.Effects {
 			shader.SetUniformArray("iResolution", iResolution);
 		}
 
-		protected override void OnUpdate(float time, float x, float y) {
+		protected override void OnUpdate(float time) {
 			rect.Position = playerPos;
 			Vec4[] iMouse = new Vec4[] { new Vec4(playerPos.X, -playerPos.Y, 0, 0) };
 
