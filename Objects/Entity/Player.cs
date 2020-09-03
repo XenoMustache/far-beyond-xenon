@@ -1,6 +1,7 @@
 ﻿using FarBeyond.Registry;
 using SFML.Graphics;
 using SFML.System;
+using System.Collections.Generic;
 using Xenon.Client;
 using Xenon.Client.Prefabs;
 using Xenon.Common.Utilities;
@@ -9,6 +10,7 @@ using static System.Math;
 namespace FarBeyond.Objects.Entities {
 	public class Player : Entity {
 		public ProjectileEmitter leftEmitter, rightEmitter;
+		public List<CollisionBox> targets;
 
 		float acceleration = 0.5f, topSpeed = 100, defaultSpeed = 25, drag = 0.25f, defaultRotationSpeed = 0.75f, acceleratedRotation = 1.5f,
 			rotationDrag = 0.1f;
@@ -19,6 +21,8 @@ namespace FarBeyond.Objects.Entities {
 
 		public Player(Vector2f position) : base(position) {
 			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i(32, 32));
+
+			targets = new List<CollisionBox>();
 
 			cam = new Camera();
 
@@ -71,15 +75,29 @@ namespace FarBeyond.Objects.Entities {
 
 			leftEmitter.angle += rotate * rotationSpeed;
 			leftEmitter.inputPosition = position;
-			//leftEmitter.offset.X = -6.5f;
-			//leftEmitter.offset.Y = -10;
 			leftEmitter.Update(deltaTime);
 
 			rightEmitter.angle += rotate * rotationSpeed;
 			rightEmitter.inputPosition = position;
-			//rightEmitter.offset.X = 6.5f;
-			//rightEmitter.offset.Y = -10;
 			rightEmitter.Update(deltaTime);
+
+			for (var i = 0; i < targets.Count; i++) {
+				for (var k = 0; k < leftEmitter.projectiles.Count; k++) {
+					var projectile = leftEmitter.projectiles[k];
+					var projTarget = projectile.collider.targets;
+
+					if (!targets[i].disposed) projTarget.Add(targets[i]);
+				}
+
+				for (var l = 0; l < rightEmitter.projectiles.Count; l++) {
+					var projectile = rightEmitter.projectiles[l];
+					var projTargets = projectile.collider.targets;
+
+					if (!targets[i].disposed) projTargets.Add(targets[i]);
+				}
+			}
+
+			targets.Clear();
 
 			collider.position = position;
 			collider.Update(deltaTime);
