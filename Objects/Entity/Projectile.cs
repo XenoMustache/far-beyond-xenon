@@ -31,9 +31,18 @@ namespace FarBeyond.Objects.Entities {
 			disposeTimer = new Clock();
 
 			switch (type) {
-				case ProjectileType.security: spriteRect.Top = 0; break;
-				case ProjectileType.player: spriteRect.Top = 16; break;
-				case ProjectileType.pirate: spriteRect.Top = 32; break;
+				case ProjectileType.security:
+					spriteRect.Top = 0;
+					spriteRect.Left = 16 * 4;
+					break;
+				case ProjectileType.player:
+					spriteRect.Top = 16;
+					spriteRect.Left = 16 * 4;
+					break;
+				case ProjectileType.pirate:
+					spriteRect.Top = 32;
+					spriteRect.Left = 16 * 4;
+					break;
 			}
 
 			sprite = new Sprite(AssetRegistry.bulletsTexture, spriteRect) {
