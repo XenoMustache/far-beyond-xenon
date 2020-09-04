@@ -5,16 +5,16 @@ using SFML.System;
 using Xenon.Client;
 
 namespace FarBeyond.Effects {
-	public class Starfield : Effect {
+	public class StarfieldFade : Effect {
 		public Vector2u resolution;
 		public Vector2f playerPos;
 		public Clock shaderClock;
 		public RectangleShape rect;
 		private Shader shader;
 
-		protected float layers = 2, fade = 0, flickerSpeed = 1, depth = 0.3f;
+		protected float layers = 2, fade = 0.2f, flickerSpeed = 1, depth = 0.3f;
 
-		public Starfield() {
+		public StarfieldFade() {
 			shader = AssetRegistry.starfield;
 
 			rect = new RectangleShape(new Vector2f(1920, 1080));
