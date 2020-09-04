@@ -7,13 +7,6 @@ uniform float iFloatDepth;
 uniform vec3 iResolution;
 uniform vec4 iMouse;
 
-/* Debug purposes only
-#define iNumLayers 2.
-#define iFade 0.
-#define iFlickerSpeed 1.
-#define iFloatDepth 0.2
-*/
-
 void mainImage( out vec4 fragColor, in vec2 fragCoord );
 
 // Remove when testing on ShaderToy
