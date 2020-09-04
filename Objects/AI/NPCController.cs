@@ -1,5 +1,4 @@
-﻿using FarBeyond.Objects.Entities;
-using Xenon.Common.Objects;
+﻿using Xenon.Common.Objects;
 
 namespace FarBeyond.Objects.AI {
 	public class NPCController : AIController {

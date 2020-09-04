@@ -1,5 +1,4 @@
-﻿using FarBeyond.Registry;
-using SFML.Graphics;
+﻿using SFML.Graphics;
 using SFML.Graphics.Glsl;
 using SFML.System;
 using Xenon.Client;
@@ -13,7 +12,7 @@ namespace FarBeyond.Effects {
 		private Shader shader;
 
 		public Starfield(float layers, float fade, float flickerSpeed, float depth) {
-			shader = AssetRegistry.starfield;
+			shader = GameRegistry.starfield;
 
 			rect = new RectangleShape(new Vector2f(1920, 1080));
 

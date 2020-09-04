@@ -13,7 +13,7 @@ namespace FarBeyond.Objects {
 			obj.health -= damage;
 
 			// TODO: Re-add relatiation state
-			
+
 			base.OnColliderEnter(collided);
 			parent.Dispose();
 		}

@@ -1,7 +1,7 @@
 ﻿using SFML.Graphics;
 
-namespace FarBeyond.Registry {
-	public class AssetRegistry {
+namespace FarBeyond {
+	public class GameRegistry {
 		public static Texture civShipsTexture, bulletsTexture, pirateShipsTexture;
 		public static Shader starfield;
 

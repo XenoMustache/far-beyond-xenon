@@ -1,5 +1,4 @@
-﻿using FarBeyond.Registry;
-using SFML.Graphics;
+﻿using SFML.Graphics;
 using SFML.System;
 using System;
 
@@ -24,12 +23,12 @@ namespace FarBeyond.Objects.Entities {
 
 			switch (type) {
 				case NPCType.Civ:
-					imageIndex = AssetRegistry.civShipsTexture;
+					imageIndex = GameRegistry.civShipsTexture;
 					spriteIndex = 1;
 					emitter = new ProjectileEmitter(position, Color.White) { damage = 20 };
 					break;
 				case NPCType.Security:
-					imageIndex = AssetRegistry.civShipsTexture;
+					imageIndex = GameRegistry.civShipsTexture;
 					spriteIndex = 3;
 					break;
 			}

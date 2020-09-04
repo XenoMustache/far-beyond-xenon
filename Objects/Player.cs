@@ -1,5 +1,4 @@
 ﻿using FarBeyond.Objects.Entities;
-using FarBeyond.Registry;
 using SFML.Graphics;
 using SFML.System;
 using System.Collections.Generic;
@@ -37,7 +36,7 @@ namespace FarBeyond.Objects {
 				offset = new Vector2f(6.5f, -10)
 			};
 
-			sprite = new Sprite(AssetRegistry.civShipsTexture, spriteRect);
+			sprite = new Sprite(GameRegistry.civShipsTexture, spriteRect);
 
 			rotationSpeed = defaultRotationSpeed;
 

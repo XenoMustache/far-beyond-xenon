@@ -1,6 +1,5 @@
 ﻿using SFML.System;
 using Xenon.Client;
-using FarBeyond.Registry;
 using Xenon.Common.State;
 using FarBeyond.States;
 
@@ -13,7 +12,7 @@ namespace FarBeyond {
 
 		protected override void PreInit() {
 			//fullscreenMode = true;
-			AssetRegistry.Init();
+			GameRegistry.Init();
 			settings.AntialiasingLevel = 8;
 		}
 

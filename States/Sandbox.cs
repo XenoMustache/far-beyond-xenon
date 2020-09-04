@@ -59,20 +59,19 @@ namespace FarBeyond.States {
 		}
 
 		public override void Update(double deltaTime) {
+			background.Update(backgroundClock.ElapsedTime.AsSeconds());
+			background.position = player.position;
+			background.parallax = player.position;
+
 			//player.targets.Add(testNPC.collider);
 			player.targets.Add(testNPC2.collider);
 
 			testNPC2.playerPosition = player.position;
 
-			background.Update(backgroundClock.ElapsedTime.AsSeconds());
-			background.position = player.position;
-			background.parallax = player.position;
-
 			base.Update(deltaTime);
 		}
 
 		public override void Render(RenderWindow window) {
-			window.Clear(Color.Blue);
 			window.Draw(background);
 			base.Render(window);
 

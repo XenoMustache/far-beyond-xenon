@@ -1,5 +1,4 @@
 ﻿using FarBeyond.Objects.Entities;
-using FarBeyond.Registry;
 using SFML.Graphics;
 using SFML.System;
 using Xenon.Common.Utilities;
@@ -11,15 +10,12 @@ namespace FarBeyond.Objects {
 		public bool decay = true;
 		Clock disposeTimer;
 
-		float angle;
-
 		public enum ProjectileType {
 			security,
 			player,
 			pirate
 		}
 
-		Sprite sprite;
 		IntRect spriteRect;
 
 		public Projectile(Vector2f position, ProjectileType type, float angle, float damage) : base(position) {
@@ -27,7 +23,7 @@ namespace FarBeyond.Objects {
 			this.angle = angle;
 			this.position = position;
 
-			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i((int)AssetRegistry.bulletsTexture.Size.X / 5, (int)AssetRegistry.bulletsTexture.Size.Y / 3));
+			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i((int)GameRegistry.bulletsTexture.Size.X / 5, (int)GameRegistry.bulletsTexture.Size.Y / 3));
 
 			disposeTimer = new Clock();
 
@@ -46,7 +42,7 @@ namespace FarBeyond.Objects {
 					break;
 			}
 
-			sprite = new Sprite(AssetRegistry.bulletsTexture, spriteRect) {
+			sprite = new Sprite(GameRegistry.bulletsTexture, spriteRect) {
 				Origin = new Vector2f(spriteRect.Width / 2, spriteRect.Height / 2),
 				Position = this.position,
 				Rotation = this.angle

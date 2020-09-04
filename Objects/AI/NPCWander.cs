@@ -15,7 +15,6 @@ namespace FarBeyond.Objects.AI {
 
 		public override void Exectute(double deltaTime) {
 			if (!hasPoint) {
-				Logger.Print("Execute");
 				var randX = new RandomizerNumber<float>(new FieldOptionsFloat() { Max = bounds.X, Min = -bounds.X });
 				var randY = new RandomizerNumber<float>(new FieldOptionsFloat() { Max = bounds.Y, Min = -bounds.Y });
 
@@ -41,7 +40,9 @@ namespace FarBeyond.Objects.AI {
 				p.angle += rotate * p.rotationSpeed.DegToRad();
 				p.sprite.Rotation += rotate * p.rotationSpeed;
 
-				//if (p.isHostile && p.position.GetDistance(p.playerPosition) < 128) ;
+				var c = (NPCController)controller;
+
+				//if (p.isHostile && p.position.GetDistance(p.playerPosition) < 128) c.currentState = c.attack;
 			}
 		}
 	}
