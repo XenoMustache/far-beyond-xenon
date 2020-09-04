@@ -1,11 +1,22 @@
 uniform float iTime;
+uniform float iNumLayers;
+uniform float iFade;
+uniform float iFlickerSpeed;
+uniform float iFloatDepth;
+
 uniform vec3 iResolution;
 uniform vec4 iMouse;
 
-#define NUM_LAYERS 2.
+/* Debug purposes only
+#define iNumLayers 2.
+#define iFade 0.
+#define iFlickerSpeed 1.
+#define iFloatDepth 0.2
+*/
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord );
 
+// Remove when testing on ShaderToy
 void main() {
     mainImage(gl_FragColor, gl_FragCoord.xy);
 }
@@ -53,7 +64,7 @@ vec3 StarLayer(vec2 uv) {
             vec3 color = sin(vec3(.2, .3, .9)*fract(n*2345.2)*123.2)*.5+.5;
             color = color*vec3(1,.25,1.+size)+vec3(.2, .2, .1)*2.;
             
-            star *= sin(iTime*1.+n*6.2831)*.5+1.;
+            star *= sin(iTime*iFlickerSpeed+n*6.2831)*.5+1.;
             col += star*size*color;
         }
     }
@@ -63,15 +74,16 @@ vec3 StarLayer(vec2 uv) {
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     vec2 uv = (fragCoord-.5*iResolution.xy)/iResolution.y;
 	vec2 M = (iMouse.xy-iResolution.xy*.5)/iResolution.y;
-    
     vec3 col = vec3(0);
     
-    for(float i=0.; i<1.; i+=1./NUM_LAYERS) {
-    	float depth = 0.2;
+    for(float i=0.; i<1.; i+=1./iNumLayers) {
+    	float depth = iFloatDepth;
         
         float scale = 5.-i;
-        float glow = depth*0.75;
-        col += StarLayer(uv*scale+i*500.+M)*glow;
+        float fade = smoothstep(0., iFade, 0.03 * iTime);
+        fade = clamp(fade, 0., 0.3);
+
+        col += StarLayer(uv*scale+i*500.-M) * depth * fade;
     }
     
     col = pow(col, vec3(.9));

@@ -42,15 +42,16 @@ namespace FarBeyond.States {
 				state = NPC.AIState.Wander
 			};
 
+			player = new Player(new Vector2f(0, 0)) {
+				health = 100,
+			};
+
 			testNPC2 = new NPC(new Vector2f(32, 0), NPC.NPCType.Civ) {
 				health = 100,
 				bounds = mapDimensions,
 				state = NPC.AIState.Wander,
-				isHostile = true
-			};
-
-			player = new Player(new Vector2f(0, 0)) {
-				health = 100,
+				isHostile = true,
+				playerPosition = player.position
 			};
 
 			Objects.Add(testNPC);
@@ -75,8 +76,7 @@ namespace FarBeyond.States {
 			window.Draw(background);
 			base.Render(window);
 
-			if (FarBeyond.showHitboxes)
-				window.Draw(mapBounds);
+			if (FarBeyond.showHitboxes) window.Draw(mapBounds);
 		}
 	}
 }
