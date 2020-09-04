@@ -3,7 +3,7 @@ using SFML.Graphics;
 using SFML.System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Xenon.Common;
+using Xenon.Common.Objects;
 using Xenon.Common.Utilities;
 
 namespace FarBeyond.Objects {

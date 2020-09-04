@@ -37,11 +37,9 @@ namespace FarBeyond.States {
 
 			mapBounds.Origin = mapBounds.Size / 2;
 
-			testNPC = new NPC(new Vector2f(-32, 0), NPC.NPCType.Civ) {
-				health = 100,
-				bounds = mapDimensions,
-				state = NPC.AIState.Wander
-			};
+			//testNPC = new NPC(new Vector2f(-32, 0), NPC.NPCType.Civ) {
+			//	health = 100,
+			//};
 
 			player = new Player(new Vector2f(0, 0)) {
 				health = 100,
@@ -49,19 +47,19 @@ namespace FarBeyond.States {
 
 			testNPC2 = new NPC(new Vector2f(32, 0), NPC.NPCType.Civ) {
 				health = 100,
-				bounds = mapDimensions,
-				state = NPC.AIState.Wander,
+				defaultRotationSpeed = 0.75f,
+				defaultSpeed = 25,
 				isHostile = true,
 				playerPosition = player.position
 			};
 
-			Objects.Add(testNPC);
+			//Objects.Add(testNPC);
 			Objects.Add(testNPC2);
 			Objects.Add(player);
 		}
 
 		public override void Update(double deltaTime) {
-			player.targets.Add(testNPC.collider);
+			//player.targets.Add(testNPC.collider);
 			player.targets.Add(testNPC2.collider);
 
 			testNPC2.playerPosition = player.position;

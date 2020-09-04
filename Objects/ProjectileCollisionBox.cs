@@ -12,12 +12,8 @@ namespace FarBeyond.Objects {
 			var obj = collided.GetParent();
 			obj.health -= damage;
 
-			if (collided.GetParent().GetType().Equals(typeof(NPC))) {
-				var p = (NPC)collided.GetParent();
-
-				if (p.isHostile) p.state = NPC.AIState.Attack;
-			}
-
+			// TODO: Re-add relatiation state
+			
 			base.OnColliderEnter(collided);
 			parent.Dispose();
 		}

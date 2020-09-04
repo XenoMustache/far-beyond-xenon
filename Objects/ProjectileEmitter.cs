@@ -4,6 +4,7 @@ using SFML.System;
 using System;
 using System.Collections.Generic;
 using Xenon.Common;
+using Xenon.Common.Objects;
 using Xenon.Common.Utilities;
 
 namespace FarBeyond.Objects {

@@ -1,7 +1,7 @@
 ﻿using FarBeyond.Effects;
 using SFML.Graphics;
 using SFML.System;
-using Xenon.Client.Prefabs;
+using Xenon.Client.Objects;
 using Xenon.Common.State;
 
 namespace FarBeyond.States {
@@ -32,7 +32,7 @@ namespace FarBeyond.States {
 		public override void Update(double deltaTime) {
 			base.Update(deltaTime);
 
-			background.parallax += new Vector2f(0.2f, 0.2f);
+			background.parallax += new Vector2f(0.5f, 0.5f);
 			background.Update(backgroundClock.ElapsedTime.AsSeconds());
 			camera.Update(deltaTime);
 		}

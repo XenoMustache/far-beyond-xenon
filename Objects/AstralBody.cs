@@ -2,6 +2,7 @@
 using SFML.Graphics;
 using SFML.System;
 using Xenon.Common;
+using Xenon.Common.Objects;
 
 namespace FarBeyond.Objects {
 	public class AstralBody : GameObject {

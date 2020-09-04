@@ -1,22 +1,23 @@
-﻿using FarBeyond.Registry;
+﻿using FarBeyond.Objects.Entities;
+using FarBeyond.Registry;
 using SFML.Graphics;
 using SFML.System;
 using System.Collections.Generic;
 using Xenon.Client;
-using Xenon.Client.Prefabs;
+using Xenon.Client.Objects;
 using Xenon.Common.Utilities;
 using static System.Math;
 
-namespace FarBeyond.Objects.Entities {
+namespace FarBeyond.Objects {
+	// TODO: EntityPlayer object
 	public class Player : Entity {
 		public ProjectileEmitter leftEmitter, rightEmitter;
 		public List<CollisionBox> targets;
 
 		float acceleration = 0.5f, topSpeed = 100, defaultSpeed = 25, drag = 0.25f, defaultRotationSpeed = 0.75f, acceleratedRotation = 1.5f,
 			rotationDrag = 0.1f;
-		float speed, angle, moveAngle, rotationSpeed;
+		float moveAngle;
 		IntRect spriteRect;
-		Sprite sprite;
 		Camera cam;
 
 		public Player(Vector2f position) : base(position) {

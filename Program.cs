@@ -6,7 +6,7 @@ namespace FarBeyond {
 
 		static void Main(string[] args) {
 			MiscUtils.HideConsole(false);
-			new FarBeyond($"Far Beyond - Xenon - {VERSION}", new SFML.System.Vector2u(856, 482));
+			new FarBeyond($"Far Beyond - Xenon - {VERSION}", new SFML.System.Vector2u(1920, 1080));
 		}
 	}
 }

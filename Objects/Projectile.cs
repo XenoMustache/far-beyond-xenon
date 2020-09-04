@@ -1,12 +1,13 @@
-﻿using FarBeyond.Registry;
+﻿using FarBeyond.Objects.Entities;
+using FarBeyond.Registry;
 using SFML.Graphics;
 using SFML.System;
 using Xenon.Common.Utilities;
 using static System.Math;
 
-namespace FarBeyond.Objects.Entities {
+namespace FarBeyond.Objects {
 	public class Projectile : Entity {
-		public float speed, lifeTime = 1000, damage;
+		public float lifeTime = 1000, damage;
 		public bool decay = true;
 		Clock disposeTimer;
 

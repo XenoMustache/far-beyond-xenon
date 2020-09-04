@@ -2,7 +2,7 @@
 using SFML.Graphics;
 using SFML.System;
 using System.Collections.Generic;
-using Xenon.Common;
+using Xenon.Common.Objects;
 
 namespace FarBeyond.Objects {
 	public class CollisionBox : GameObject {
