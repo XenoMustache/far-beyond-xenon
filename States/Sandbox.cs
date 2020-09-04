@@ -10,7 +10,7 @@ namespace FarBeyond.States {
 		public Vector2f mapDimensions;
 
 		Clock backgroundClock;
-		StarfieldFade background;
+		Starfield background;
 		RectangleShape mapBounds;
 		Player player;
 		NPC testNPC, testNPC2;
@@ -19,7 +19,8 @@ namespace FarBeyond.States {
 			mapDimensions = new Vector2f(256, 256);
 
 			backgroundClock = new Clock();
-			background = new StarfieldFade();
+
+			background = new Starfield(2, 0, 1, 0.3f);
 
 			window.KeyPressed += (s, e) => {
 				if (e.Code == SFML.Window.Keyboard.Key.Space) {
@@ -66,7 +67,8 @@ namespace FarBeyond.States {
 			testNPC2.playerPosition = player.position;
 
 			background.Update(backgroundClock.ElapsedTime.AsSeconds());
-			background.playerPos = player.position;
+			background.position = player.position;
+			background.parallax = player.position;
 
 			base.Update(deltaTime);
 		}

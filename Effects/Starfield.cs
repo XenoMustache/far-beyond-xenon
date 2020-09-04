@@ -7,14 +7,12 @@ using Xenon.Client;
 namespace FarBeyond.Effects {
 	public class Starfield : Effect {
 		public Vector2u resolution;
-		public Vector2f playerPos;
+		public Vector2f position, parallax;
 		public Clock shaderClock;
 		public RectangleShape rect;
 		private Shader shader;
 
-		protected float layers = 2, fade = 0, flickerSpeed = 1, depth = 0.3f;
-
-		public Starfield() {
+		public Starfield(float layers, float fade, float flickerSpeed, float depth) {
 			shader = AssetRegistry.starfield;
 
 			rect = new RectangleShape(new Vector2f(1920, 1080));
@@ -31,8 +29,8 @@ namespace FarBeyond.Effects {
 		}
 
 		protected override void OnUpdate(float time) {
-			rect.Position = playerPos;
-			Vec4[] iMouse = new Vec4[] { new Vec4(-playerPos.X, playerPos.Y, 0, 0) };
+			rect.Position = position;
+			Vec4[] iMouse = new Vec4[] { new Vec4(-parallax.X, parallax.Y, 0, 0) };
 
 			shader.SetUniform("iTime", time);
 			shader.SetUniformArray("iMouse", iMouse);

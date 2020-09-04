@@ -12,6 +12,7 @@ namespace FarBeyond {
 		public FarBeyond(string name, Vector2u screenSize) : base(name, screenSize) { }
 
 		protected override void PreInit() {
+			fullscreenMode = true;
 			AssetRegistry.Init();
 			settings.AntialiasingLevel = 8;
 		}
@@ -27,7 +28,8 @@ namespace FarBeyond {
 
 			window.SetKeyRepeatEnabled(false);
 
-			stateManager.AddState(new Sandbox(window), 1);
+			stateManager.AddState(new Showcase(window), 1);
+			//stateManager.AddState(new Sandbox(window), 1);
 			stateManager.Goto(1, false, true);
 
 			base.Init();
