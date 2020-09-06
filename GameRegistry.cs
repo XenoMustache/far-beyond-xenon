@@ -10,7 +10,7 @@ namespace FarBeyond {
 			pirateShipsTexture = new Texture("Resources\\Textures\\pirate_ships.png");
 			bulletsTexture = new Texture("Resources\\Textures\\bullets.png");
 
-			starfield = new Shader(null, null, "Resources\\Shaders\\starfield.glsl");
+			starfield = new Shader(null, null, "Resources\\Shaders\\starfield.fsh");
 		}
 	}
 }
