@@ -17,7 +17,7 @@ namespace FarBeyond {
 			explosion = addFragShader("explode.glsl");
 
 			uiDefault = addFont("Monaco.ttf");
-			uiStylized = addFont("KennyRocket.ttf");
+			uiStylized = addFont("KenneyRocket.ttf");
 		}
 
 		static Texture addTexture(string name) {
@@ -25,6 +25,7 @@ namespace FarBeyond {
 			return texture;
 		}
 
+		// TODO: Add other shader types
 		static Shader addFragShader(string fragment) {
 			var locale = $"{location}\\Shaders\\";
 			var shader = new Shader(null, null, $"{locale}{fragment}");
