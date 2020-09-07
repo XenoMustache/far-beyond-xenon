@@ -19,6 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Shaders\explode.glsl" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Resources\Fonts\" />
   </ItemGroup>
 </Project>

@@ -8,7 +8,7 @@ namespace FarBeyond.States {
 	public class Showcase : GameState {
 		Camera camera;
 		Clock backgroundClock;
-		Starfield background;
+		EffectStarfield background;
 
 		public Showcase(RenderWindow window) : base(window) {
 			window.SetMouseCursorVisible(false);
@@ -16,7 +16,7 @@ namespace FarBeyond.States {
 			camera = new Camera();
 
 			backgroundClock = new Clock();
-			background = new Starfield(2, 0.4f, 1, 0.5f);
+			background = new EffectStarfield(2, 0.4f, 1, 0.5f);
 
 			camera.camZoom = 0.5f;
 			camera.target = new Vector2f(0, 0);

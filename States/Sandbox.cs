@@ -9,18 +9,14 @@ namespace FarBeyond.States {
 	public class Sandbox : GameState {
 		public Vector2f mapDimensions;
 
-		Clock backgroundClock;
-		Starfield background;
+		EffectStarfield background;
 		RectangleShape mapBounds;
 		Player player;
-		NPC testNPC, testNPC2;
+		NPC testNPC2;
 
 		public Sandbox(RenderWindow window) : base(window) {
 			mapDimensions = new Vector2f(256, 256);
-
-			backgroundClock = new Clock();
-
-			background = new Starfield(2, 0, 1, 0.3f);
+			background = new EffectStarfield(2, 0, 1, 0.3f);
 
 			window.KeyPressed += (s, e) => {
 				if (e.Code == SFML.Window.Keyboard.Key.Space) {
@@ -37,10 +33,6 @@ namespace FarBeyond.States {
 
 			mapBounds.Origin = mapBounds.Size / 2;
 
-			//testNPC = new NPC(new Vector2f(-32, 0), NPC.NPCType.Civ) {
-			//	health = 100,
-			//};
-
 			player = new Player(new Vector2f(0, 0)) {
 				health = 100,
 			};
@@ -53,17 +45,15 @@ namespace FarBeyond.States {
 				playerPosition = player.position
 			};
 
-			//Objects.Add(testNPC);
 			Objects.Add(testNPC2);
 			Objects.Add(player);
 		}
 
 		public override void Update(double deltaTime) {
-			background.Update(backgroundClock.ElapsedTime.AsSeconds());
+			background.Update(deltaTime);
 			background.position = player.position;
 			background.parallax = player.position;
 
-			//player.targets.Add(testNPC.collider);
 			player.targets.Add(testNPC2.collider);
 
 			testNPC2.playerPosition = player.position;
