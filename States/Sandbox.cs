@@ -63,6 +63,7 @@ namespace FarBeyond.States {
 
 		public override void Render(RenderWindow window) {
 			window.Draw(background);
+			window.Draw(explode);
 			base.Render(window);
 
 			if (FarBeyond.showHitboxes) window.Draw(mapBounds);

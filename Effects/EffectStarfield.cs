@@ -17,9 +17,7 @@ namespace FarBeyond.Effects {
 			shader = GameRegistry.starfield;
 
 			rect = new RectangleShape(new Vector2f(1920, 1080));
-
 			rect.Origin = rect.Size / 2;
-			rect.FillColor = Color.Transparent;
 
 			Vec3[] iResolution = new Vec3[] { new Vec3(800, 450, 0) };
 
